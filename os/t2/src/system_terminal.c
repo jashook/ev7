@@ -93,24 +93,16 @@ uint16_t make_vga_entry(char _Character, uint8_t _Color)
 void terminal_clear_row(terminal* _Terminal, size_t _RowNumber)
 {
 
-   size_t _SavedRowNumber, _SavedColumnNumber, _Count;
+   size_t _Count;
 
-   _SavedRowNumber = _Terminal->m_row;
-   _SavedColumnNumber = _Terminal->m_column;
-
-   _Terminal->m_row = _RowNumber;
- 
-   for (_Count = 0; _Count < _Terminal->m_vga_column; ++_Count)
+   for (_Count = 0; _Count < _Terminal->m_vga_width; ++_Count)
    {
 
-      _Terminal->m_column = _Count;
+      const size_t _Index = _RowNumber * _Terminal->m_vga_width + _Count;
 
-      terminal_put_char(_Terminal, ' ');
+      _Terminal->m_buffer[_Index] = make_vga_entry(' ', _Terminal->m_color);
 
    }
-
-   _Terminal->m_row = _SavedRowNumber;
-   _Terminal->m_column = _SavedColumnNumber;
 
 }
 
@@ -212,6 +204,16 @@ void terminal_create(terminal* _Terminal, size_t _Width, size_t _Height)
 void terminal_put_char(terminal* _Terminal, char _Character)
 {
 
+   if (_Character == '\n') 
+   {
+
+      _Terminal->m_column = 0;
+      ++_Terminal->m_row;
+
+      return;
+
+   }
+
    terminal_put_entry_at(_Terminal, _Character);
 
    if (++_Terminal->m_column == _Terminal->m_vga_width)
@@ -227,28 +229,28 @@ void terminal_put_char(terminal* _Terminal, char _Character)
          _SavedRowNumber = _Terminal->m_row;
          _SavedColumnNumber = _Terminal->m_column;
 
-         for (_RowCount = 0; _RowCount < _Terminal->m_vga_row - 1; ++_RowCount)
+         for (_RowCount = 0; _RowCount < _Terminal->m_vga_height - 1; ++_RowCount)
          {
 
-            _Terminal->m_row = _RowNumber;
+            _Terminal->m_row = _RowCount;
  
-            for (_ColumnCount = 0; _ColumnCount < _Terminal->m_vga_column; ++_ColumnCount)
+            for (_ColumnCount = 0; _ColumnCount < _Terminal->m_vga_width; ++_ColumnCount)
             {
 
                _Terminal->m_column = _ColumnCount;
 
-               terminal_copy_entry_at(_Terminal, _Terminal->m_column + 1, _Terminal->m_row + 1);
+               terminal_copy_entry_at(_Terminal, _Terminal->m_column, _Terminal->m_row + 1);
 
             }
 
          }
 
-         terminal_clear_row(_Terminal, _SavedRowNumber);
+         terminal_clear_row(_Terminal, _Terminal->m_vga_height - 1);
+
+         _Terminal->m_row = _SavedRowNumber - 1;
+         _Terminal->m_column = _SavedColumnNumber;
 
       }
-
-      _Terminal->m_row = _SavedRowNumber;
-      _Terminal->m_column = _SavedColumnNumber;
 
    }
 
