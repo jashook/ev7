@@ -28,10 +28,11 @@
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-int str_cmp(const char*, const char*);
-void str_cpy(char*, const char*);
-int str_len(const char*);
-void mem_set(void*, int, size_t);
+int strcmp(const char*, const char*);
+void strcpy(char*, const char*);
+int strlen(const char*);
+void* memcpy(void*, void*, size_t);
+void memset(void*, int, size_t);
 
 /* ************************************************************************** */
 /* ************************************************************************** */
