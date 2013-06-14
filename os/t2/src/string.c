@@ -21,7 +21,7 @@
 /* ************************************************************************** */
 /* Function:                                                                  */
 /*                                                                            */
-/*    str_cmp                                                                 */
+/*    strcmp                                                                  */
 /*                                                                            */
 /* Arguements:                                                                */
 /*                                                                            */
@@ -35,7 +35,7 @@
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-int str_cmp(const char* _String1, const char* _String2)
+int strcmp(const char* _String1, const char* _String2)
 {
 
    int _ReturnValue = 0;
@@ -78,7 +78,7 @@ int str_cmp(const char* _String1, const char* _String2)
 /* ************************************************************************** */
 /* Function:                                                                  */
 /*                                                                            */
-/*    str_cpy                                                                 */
+/*    strcpy                                                                  */
 /*                                                                            */
 /* Arguements:                                                                */
 /*                                                                            */
@@ -92,7 +92,7 @@ int str_cmp(const char* _String1, const char* _String2)
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-void str_cpy(char* _Destination, const char* _Source)
+void strcpy(char* _Destination, const char* _Source)
 {
 
    while(*_Source != '\0') *_Destination++ = *_Source++;
@@ -103,7 +103,7 @@ void str_cpy(char* _Destination, const char* _Source)
 /* ************************************************************************** */
 /* Function:                                                                  */
 /*                                                                            */
-/*    str_len                                                                 */
+/*    strlen                                                                  */
 /*                                                                            */
 /* Arguements:                                                                */
 /*                                                                            */
@@ -116,7 +116,7 @@ void str_cpy(char* _Destination, const char* _Source)
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-int str_len(const char* _String)
+int strlen(const char* _String)
 {
 
    int _Count;
@@ -131,7 +131,43 @@ int str_len(const char* _String)
 /* ************************************************************************** */
 /* Function:                                                                  */
 /*                                                                            */
-/*    mem_set                                                                 */
+/*    mem_cpy                                                                 */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    void*: destination array                                                */
+/*    void*: source array                                                     */
+/*    size_t: number of elements to copy                                      */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    void* copied array                                                      */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
+
+void* memcpy(void* _DestinationArray, void* _SourceArray, size_t _NumberOfElements)
+{
+
+   char* _DestinationArrayBytes = (char*)_DestinationArray;
+   char* _SourceArrayBytes = (char*)_SourceArray;
+
+   while(--_NumberOfElements)
+   {
+
+      *_DestinationArrayBytes++ = *_SourceArrayBytes++;
+
+   }
+
+   return _DestinationArray;
+
+}
+
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    memset                                                                  */
 /*                                                                            */
 /* Arguements:                                                                */
 /*                                                                            */
@@ -146,7 +182,7 @@ int str_len(const char* _String)
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-void mem_set(void* _Array, int _Value, size_t _Size)
+void memset(void* _Array, int _Value, size_t _Size)
 {
    
    size_t _Count;
