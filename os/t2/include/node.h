@@ -3,62 +3,61 @@
 /*                                                                            */
 /* Author: Jarret Shook                                                       */
 /*                                                                            */
-/* Module: stdlib.h                                                           */
+/* Module: node.h                                                             */
 /*                                                                            */
 /* Modifications:                                                             */
 /*                                                                            */
-/* 13-June-13: Version 1.0: Last Updated                                      */
-/* 13-June-13: Version 1.0: Created                                           */
-/*                                                                            */
-/* Version: 1.0                                                               */
+/* 14-June-13: Version 1.0: Created                                           */
 /*                                                                            */
 /* Timeperiod: ev7                                                            */
 /*                                                                            */
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-#ifndef __STDLIB_H__
-#define __STDLIB_H__
+#ifndef __NODE_H__
+#define __NODE_H__
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-#include "node.h"
-
-/* ************************************************************************** */
-/* ************************************************************************** */
-
-typedef struct malloc_ds
+typedef struct avl_tree_node
 {
-   struct avl_tree_node*;
-   struct avl_tree_node*;
+   void* m_key;
+   void* m_data;
+   struct avl_tree_node* m_left_child;
+   struct avl_tree_node* m_right_child;
+   struct avl_tree_node* m_parent;
+   size_t m_height;
 
-} malloc_ds;
+} avl_tree_node;
 
-typedef struct malloc_struct
+typedef struct bn_tree_node
 {
-   char** m_blocks;
-   struct malloc_ds* m_tree;
+   void* m_data;
+   struct bn_tree_node* m_left;
+   struct bn_tree_node* m_right;
 
-} malloc_struct;
+} bn_tree_node;
+
+typedef struct double_linked_list_node
+{
+   void* m_data;
+   struct double_linked_list_node* m_prev;
+   struct double_linked_list_node* m_next;
+
+} double_linked_list_node;
+
+typedef struct linked_list_node
+{
+   void* m_data;
+   struct linked_list_node* m_next;
+
+} linked_list_node;
 
 /* ************************************************************************** */
 /* ************************************************************************** */
-
-static const UPDATE_SIZE = 1024; /* used by malloc for creation of a free list */
-
-/* ************************************************************************** */
-/* ************************************************************************** */
-
-char* itoa(int, char*, int);
-void free(void*);
-void* malloc(size_t);
-char* uitoa(unsigned int, char*, int);
-
-/* ************************************************************************** */
-/* ************************************************************************** */
-
-#endif /* __STDLIB_H__ */
+ 
+#endif /* __NODE_H__ */
 
 /* ************************************************************************** */
 /* ************************************************************************** */

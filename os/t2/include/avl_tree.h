@@ -3,62 +3,78 @@
 /*                                                                            */
 /* Author: Jarret Shook                                                       */
 /*                                                                            */
-/* Module: stdlib.h                                                           */
+/* Module: avl_tree.h                                                         */
 /*                                                                            */
 /* Modifications:                                                             */
 /*                                                                            */
-/* 13-June-13: Version 1.0: Last Updated                                      */
-/* 13-June-13: Version 1.0: Created                                           */
-/*                                                                            */
-/* Version: 1.0                                                               */
+/* 14-June-13: Version 2.0: Last Updated                                      */
+/* 14-June-13: Version 2.0: Updated to ev7 and began fixing bugs              */
+/* 19-Feb-13: Version 1.0: Created                                            */
 /*                                                                            */
 /* Timeperiod: ev7                                                            */
+/*                                                                            */
+/* Notes: An empty avl_tree is defined to be a avl_tree struct that points    */
+/*        to an avl_tree struct of size 0.                                    */
+/*        To Properly use and free memory use the create or delete functions  */
 /*                                                                            */
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-#ifndef __STDLIB_H__
-#define __STDLIB_H__
+#ifndef __AVL_TREE_H__
+#define __AVL_TREE_H__
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
 #include "node.h"
+#include "queue.h"
+#include "stack.h"
+#include "vector.h"
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-typedef struct malloc_ds
+/* type definitions */
+
+typedef struct avl_tree
 {
-   struct avl_tree_node*;
-   struct avl_tree_node*;
+   avl_node* m_root;
+   avl_node* m_left_leaf_node;
+   avl_node* m_right_leaf_node;
+   int m_size;
 
-} malloc_ds;
-
-typedef struct malloc_struct
-{
-   char** m_blocks;
-   struct malloc_ds* m_tree;
-
-} malloc_struct;
+} avl_tree;
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-static const UPDATE_SIZE = 1024; /* used by malloc for creation of a free list */
+/* functions for creating and deleting an avl_tree struct */
+
+avl_tree* avl_tree_create();
+
+void avl_tree_free(avl_tree*);
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-char* itoa(int, char*, int);
-void free(void*);
-void* malloc(size_t);
-char* uitoa(unsigned int, char*, int);
+/* general functions for an avl_tree */
+
+vector* avl_tree_breadth_first_traversal(avl_tree*);
+int avl_tree_compare(void*, void*);
+int avl_tree_contains(avl_tree*, void*);
+void avl_tree_insert(avl_tree*, void*, void*);
+void avl_tree_remove(avl_tree*, void*);
+void* avl_tree_search(avl_tree*, void*);
+int avl_tree_size(avl_tree*);
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-#endif /* __STDLIB_H__ */
+#endif /* __AVL_TREE_H__ */
 
 /* ************************************************************************** */
 /* ************************************************************************** */

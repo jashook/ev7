@@ -3,62 +3,85 @@
 /*                                                                            */
 /* Author: Jarret Shook                                                       */
 /*                                                                            */
-/* Module: stdlib.h                                                           */
+/* Module: linked_list.h                                                      */
 /*                                                                            */
 /* Modifications:                                                             */
 /*                                                                            */
-/* 13-June-13: Version 1.0: Last Updated                                      */
-/* 13-June-13: Version 1.0: Created                                           */
+/* 14-June-13: Version 2.0: Last updated                                      */
+/* 14-June-13: Version 2.0: Updated to ev7 and began fixing bugs              */
+/* 27-Dec-12: Version 1.1: Small updates                                      */
+/* 22-Oct-12: Version 1.0: Created                                            */
 /*                                                                            */
 /* Version: 1.0                                                               */
 /*                                                                            */
 /* Timeperiod: ev7                                                            */
 /*                                                                            */
+/* Notes: An empty linked_list is defined to be a linked_list struct that     */
+/*        points to a linked_list node and has size = 0                       */
+/*        To Properly use and free memory use the create or delete functions  */
+/*                                                                            */
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-#ifndef __STDLIB_H__
-#define __STDLIB_H__
+#ifndef __LINKED_LIST_H__
+#define __LINKED_LIST_H__
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-#include "node.h"
+#include <stdlib.h>
+#include <stdio.h>
+
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-typedef struct malloc_ds
+
+/* ///////////////////////////////////////////////////////////////////////// */
+/* ///////////////////////////////////////////////////////////////////////// */
+
+/* type definitions */
+
+typedef struct double_linked_list
 {
-   struct avl_tree_node*;
-   struct avl_tree_node*;
+   
+   double_linked_list_node* m_head;
+   double_linked_list_node* m_tail;
+   int m_size;
 
-} malloc_ds;
-
-typedef struct malloc_struct
-{
-   char** m_blocks;
-   struct malloc_ds* m_tree;
-
-} malloc_struct;
+} double_linked_list;
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-static const UPDATE_SIZE = 1024; /* used by malloc for creation of a free list */
+/* functions for creating and deleting a linked_list struct */
+
+double_linked_list* double_linked_list_create();
+
+void double_linked_list_free(double_linked_list*);
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-char* itoa(int, char*, int);
-void free(void*);
-void* malloc(size_t);
-char* uitoa(unsigned int, char*, int);
+/* general functions for a linked_list */
+
+void* double_linked_list_at(double_linked_list*, int);
+void* double_linked_list_back(double_linked_list*);
+void double_linked_list_clear(double_linked_list*);
+void double_linked_list_empty(double_linked_list*);
+void* double_linked_list_front(double_linked_list*);
+void double_linked_list_insert(double_linked_list*, int);
+void* double_linked_list_pop_back(double_linked_list*);
+void* double_linked_list_pop_front(double_linked_list*);
+void double_linked_list_push_back(double_linked_list*, void*);
+void double_linked_list_push_front(double_linked_list*, void*);
+void double_linked_list_remove(double_linked_list*, int);
+int double_linked_list_size(double_linked_list*);
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-#endif /* __STDLIB_H__ */
+#endif /* __LINKED_LIST_H__ */
 
 /* ************************************************************************** */
 /* ************************************************************************** */

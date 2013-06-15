@@ -3,62 +3,82 @@
 /*                                                                            */
 /* Author: Jarret Shook                                                       */
 /*                                                                            */
-/* Module: stdlib.h                                                           */
+/* Module: array.h                                                            */
 /*                                                                            */
 /* Modifications:                                                             */
 /*                                                                            */
-/* 13-June-13: Version 1.0: Last Updated                                      */
-/* 13-June-13: Version 1.0: Created                                           */
+/* 14-June-13: Version 2.0: Updated to ev7 and began fixing bugs              */
+/* 16-Feb-13: Version 1.0: Created                                            */
 /*                                                                            */
 /* Version: 1.0                                                               */
 /*                                                                            */
-/* Timeperiod: ev7                                                            */
+/* Timeperiod: Ev6                                                            */
+/*                                                                            */
+/* Notes: An empty array is defined to be a array struct that points to an    */
+/*        array struct of size 0.                                             */
+/*        To Properly use and free memory use the create or delete functions  */
 /*                                                                            */
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-#ifndef __STDLIB_H__
-#define __STDLIB_H__
+#ifndef __ARRAY_H__
+#define __ARRAY_H__
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-#include "node.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-typedef struct malloc_ds
+/* type definitions */
+
+typedef struct array
 {
-   struct avl_tree_node*;
-   struct avl_tree_node*;
+   
+   void** m_array;
+   int m_capacity;
+   int m_size;
 
-} malloc_ds;
-
-typedef struct malloc_struct
-{
-   char** m_blocks;
-   struct malloc_ds* m_tree;
-
-} malloc_struct;
+} array;
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-static const UPDATE_SIZE = 1024; /* used by malloc for creation of a free list */
+/* functions for creating and deleting an array struct */
+
+array* array_create();
+
+void array_free(array*);
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-char* itoa(int, char*, int);
-void free(void*);
-void* malloc(size_t);
-char* uitoa(unsigned int, char*, int);
+/* general functions for a array */
+
+void* array_at(array*, int);
+void* array_at_safe(array*, int);
+void* array_back(array*);
+void array_clear(array*);
+void array_empty(array*);
+void* array_front(array*);
+void array_insert(array*, int, void*);
+void* array_pop_back(array*);
+void* array_pop_front(array*);
+void array_push_back(array*, void*);
+void array_push_front(array*, void*);
+void array_remove(array*, int);
+void array_shift_left(array*, int);
+void array_shift_right(array*, int);
+int array_size(array*);
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-#endif /* __STDLIB_H__ */
+#endif /* __ARRAY_H__ */
 
 /* ************************************************************************** */
 /* ************************************************************************** */

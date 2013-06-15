@@ -3,62 +3,78 @@
 /*                                                                            */
 /* Author: Jarret Shook                                                       */
 /*                                                                            */
-/* Module: stdlib.h                                                           */
+/* Module: queue.h                                                            */
 /*                                                                            */
 /* Modifications:                                                             */
 /*                                                                            */
-/* 13-June-13: Version 1.0: Last Updated                                      */
-/* 13-June-13: Version 1.0: Created                                           */
-/*                                                                            */
-/* Version: 1.0                                                               */
+/* 14-June-13: Last Updated                                                   */
+/* 14-June-13: updated to ev7 and began fixing bugs                           */
+/* 19-Feb-13: Version 1.0: Created                                            */
 /*                                                                            */
 /* Timeperiod: ev7                                                            */
 /*                                                                            */
+/* Notes: An empty queue is defined to be a queue struct that points to an    */
+/*        queue struct of size 0.                                             */
+/*        To Properly use and free memory use the create or delete functions  */
+/*                                                                            */
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-#ifndef __STDLIB_H__
-#define __STDLIB_H__
+#ifndef __QUEUE_H__
+#define __QUEUE_H__
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-#include "node.h"
+
+
+/* ///////////////////////////////////////////////////////////////////////// */
+/* ///////////////////////////////////////////////////////////////////////// */
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+#include "linked_list.h"
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-typedef struct malloc_ds
+
+
+/* ///////////////////////////////////////////////////////////////////////// */
+/* ///////////////////////////////////////////////////////////////////////// */
+
+/* type definitions */
+
+typedef struct queue
 {
-   struct avl_tree_node*;
-   struct avl_tree_node*;
+   
+   double_linked_list* m_list;
+   int m_size;
 
-} malloc_ds;
-
-typedef struct malloc_struct
-{
-   char** m_blocks;
-   struct malloc_ds* m_tree;
-
-} malloc_struct;
+} queue;
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-static const UPDATE_SIZE = 1024; /* used by malloc for creation of a free list */
+/* functions for creating and deleting an stack struct */
+
+void queue_create(queue*);
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-char* itoa(int, char*, int);
-void free(void*);
-void* malloc(size_t);
-char* uitoa(unsigned int, char*, int);
+/* general functions for a stack */
+
+void push(queue*, void*);
+void* pop_queue(queue*);
+int size_queue(queue*);
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-#endif /* __STDLIB_H__ */
+#endif /* __QUEUE_H__ */
 
 /* ************************************************************************** */
 /* ************************************************************************** */
