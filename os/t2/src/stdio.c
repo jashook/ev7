@@ -43,7 +43,7 @@ int printf(const char* _String, ...)
 
    static int _Initialized = 0;
 
-   if (!_Initialized) terminal_create_terminal(_Terminal);
+   if (!_Initialized) terminal_create(&_Terminal, 80, 20);
 
    va_list _Args;
 
@@ -55,7 +55,7 @@ int printf(const char* _String, ...)
       if (*_Pointer != '%')
       {
 
-         putchar(*_Pointer);
+         terminal_put_char(&_Terminal, *_Pointer);
 
          continue;
 

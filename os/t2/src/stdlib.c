@@ -67,9 +67,9 @@ char* itoa(int _Integer, char* _String, int _Base)
 
    if (_Signed) *--_Pointer = '-';
 
-   str_cpy(_String, _Pointer);
+   strcpy(_String, _Pointer);
 
-   return _String;
+   return _Pointer;
 
 }
 
@@ -123,7 +123,7 @@ char* uitoa(unsigned int _Integer, char* _String, int _Base)
 
    if (_Signed) *--_Pointer = '-';
 
-   str_cpy(_String, _Pointer);
+   strcpy(_String, _Pointer);
 
    return _String;
 
