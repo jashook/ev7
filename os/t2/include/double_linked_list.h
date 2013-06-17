@@ -29,9 +29,21 @@
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
+#ifdef __unix__
 
+   #include <stdlib.h>
+   #include <stdio.h>
+   #include <string.h>
+
+#else
+
+   #include "stdlib.h"
+   #include "stdio.h"
+   #include "string.h"
+
+#endif
+
+#include "node.h"
 
 /* ************************************************************************** */
 /* ************************************************************************** */
@@ -41,8 +53,8 @@
 typedef struct double_linked_list
 {
    
-   double_linked_list_node m_head;
-   double_linked_list_node m_tail;
+   double_linked_list_node* m_head;
+   double_linked_list_node* m_tail;
    int m_size;
 
 } double_linked_list;
@@ -61,11 +73,11 @@ void double_linked_list_free(double_linked_list*);
 
 /* general functions for a linked_list */
 
-void* double_linked_list_at(double_linked_list*, int);
-void* double_linked_list_back(double_linked_list*);
+void** double_linked_list_at(double_linked_list*, int);
+void** double_linked_list_back(double_linked_list*);
 void double_linked_list_clear(double_linked_list*);
 void double_linked_list_empty(double_linked_list*);
-void* double_linked_list_front(double_linked_list*);
+void** double_linked_list_front(double_linked_list*);
 void double_linked_list_insert(double_linked_list*, int);
 void* double_linked_list_pop_back(double_linked_list*);
 void* double_linked_list_pop_front(double_linked_list*);
