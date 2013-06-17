@@ -50,7 +50,7 @@ typedef struct array
 
 /* functions for creating and deleting an array struct */
 
-array* array_create();
+void array_create(array*, size_t);
 
 void array_free(array*);
 
@@ -59,12 +59,12 @@ void array_free(array*);
 
 /* general functions for a array */
 
-void* array_at(array*, int);
-void* array_at_safe(array*, int);
-void* array_back(array*);
+void** array_at(array*, int);
+void** array_at_safe(array*, int);
+void** array_back(array*);
 void array_clear(array*);
 void array_empty(array*);
-void* array_front(array*);
+void** array_front(array*);
 void array_insert(array*, int, void*);
 void* array_pop_back(array*);
 void* array_pop_front(array*);

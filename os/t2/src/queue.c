@@ -3,13 +3,13 @@
 /*                                                                            */
 /* Author: Jarret Shook                                                       */
 /*                                                                            */
-/* Module: queue.h                                                            */
+/* Module: queue.c                                                            */
 /*                                                                            */
 /* Modifications:                                                             */
 /*                                                                            */
-/* 16-June-13: Last Updated                                                   */
-/* 14-June-13: updated to ev7 and began fixing bugs                           */
-/* 19-Feb-13: Version 1.0: Created                                            */
+/* 16-June-13: Version 2.0: Last Updated                                      */
+/* 16-June-13: Version 2.0: Updated to ev7 and began bug fixing               */
+/* 16-Feb-13: Version 1.0: Created                                            */
 /*                                                                            */
 /* Timeperiod: ev7                                                            */
 /*                                                                            */
@@ -20,52 +20,44 @@
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-#ifndef __QUEUE_H__
-#define __QUEUE_H__
-
-/* ************************************************************************** */
-/* ************************************************************************** */
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-
-#include "linked_list.h"
-
-/* ************************************************************************** */
-/* ************************************************************************** */
-
-/* type definitions */
-
-typedef struct queue
-{
-   
-   double_linked_list* m_list;
-
-} queue;
+#include "queue.h"
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
 /* functions for creating and deleting an stack struct */
 
-void queue_create(queue*);
+void queue_create()
+{
+   _Queue->m_list = malloc(sizeof(double_linked_list));
 
-void queue_free(queue*);
+   double_linked_list_create(_Queue->m_list);
+}
+
+void stack_free(queue* _Queue)
+{
+   double_linked_list_free(_Queue->m_list);
+}
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
 /* general functions for a stack */
 
-void queue_push(queue*, void*);
-void* pop_queue(queue*);
-int size_queue(queue*);
+void queue_pop(queue* _Queue)
+{
+   return *double_linked_list_pop_back(_Queue->m_list);
+}
 
-/* ************************************************************************** */
-/* ************************************************************************** */
+void push_queue(queue* _Queue, void* _Data)
+{
+   double_linked_list_push_back(_Queue->m_list, _Data);
+}
 
-#endif /* __QUEUE_H__ */
+int queue_size(queue* _Queue)
+{
+   double_linked_list_size(_Queue->m_size);
+}
 
 /* ************************************************************************** */
 /* ************************************************************************** */

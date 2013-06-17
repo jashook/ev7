@@ -1,8 +1,14 @@
 FILES := $(wildcard src/*.c)
+TESTSRC := $(wildcard test/src/*.c)
 
 INCLUDE := include
+TESTINCLUDE := test/include
 
 all: debug clean make_iso
+
+test-gcc: $(TESTSRC)
+
+	gcc -I $(TESTINCLUDE) -g -std=c89 $(TESTSRC)
 
 debug: $(FILES)
 	
