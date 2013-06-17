@@ -1,67 +1,71 @@
-/* ///////////////////////////////////////////////////////////////////////// */
-/* ///////////////////////////////////////////////////////////////////////// */
-/*                                                                           */
-/* Author: Jarret Shook                                                      */
-/*                                                                           */
-/* Module: stack.c                                                           */
-/*                                                                           */
-/* Modifications:                                                            */
-/*                                                                           */
-/* 16-Feb-13: Version 1.0: Created                                           */
-/*                                                                           */
-/* Timeperiod: ev6                                                           */
-/*                                                                           */
-/* Notes: An empty stack is defined to be a stack struct that points to an   */
-/*        stack struct of size 0.                                            */
-/*        To Properly use and free memory use the create or delete functions */
-/*                                                                           */
-/* ///////////////////////////////////////////////////////////////////////// */
-/* ///////////////////////////////////////////////////////////////////////// */
+/* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/* Author: Jarret Shook                                                       */
+/*                                                                            */
+/* Module: stack.c                                                            */
+/*                                                                            */
+/* Modifications:                                                             */
+/*                                                                            */
+/* 17-June-13: Version 2.0: Last Updated                                      */
+/* 17-June-13: Version 2.0: Updated to ev7 and started bug fixes              */
+/* 16-Feb-13: Version 1.0: Created                                            */
+/*                                                                            */
+/* Timeperiod: ev7                                                            */
+/*                                                                            */
+/* Notes: An empty stack is defined to be a stack struct that points to an    */
+/*        stack struct of size 0.                                             */
+/*        To Properly use and free memory use the create or delete functions  */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
 
 #include "stack.h"
 
-/* ///////////////////////////////////////////////////////////////////////// */
-/* ///////////////////////////////////////////////////////////////////////// */
+/* ************************************************************************** */
+/* ************************************************************************** */
 
 /* functions for creating and deleting an stack struct */
 
-stack* create_stack()
+void stack_create(stack* _Stack)
 {
-   stack* _Stack = malloc(sizeof(stack));
 
-   _Stack->m_list = create_linked_list();
+   double_linked_list* _List = malloc(sizeof(double_linked_list));
 
-   _Stack->m_size = 0;
+   _Stack->m_list = double_linked_list_create(_List);
 
-   return _Stack;
 }
 
-void delete_stack(stack* _Stack)
+void stack_free(stack* _Stack)
 {
-   delete_linked_list(_Stack->m_list);
 
-   free(_Stack);
+   double_linked_list_free(_Stack->m_list);
+
 }
 
-/* ///////////////////////////////////////////////////////////////////////// */
-/* ///////////////////////////////////////////////////////////////////////// */
+/* ************************************************************************** */
+/* ************************************************************************** */
 
 /* general functions for a stack */
 
-void pop_stack(stack* _Stack)
+void stack_pop(stack* _Stack)
 {
-   return pop_back_linked_list(_Stack->m_list);
+
+   return double_linked_list_pop_back(_Stack->m_list);
+
 }
 
 void push_stack(stack* _Stack, void* _Data)
 {
-   push_back(_Stack->m_list, _Data);
+
+   double_linked_list_push_back(_Stack->m_list, _Data);
+
 }
 
-int size_stack(stack* _Stack)
+int stack_size(stack* _Stack)
 {
-   return _Stack->m_size;
+   return double_linked_list_size(_Stack->m_list);
 }
 
-/* ///////////////////////////////////////////////////////////////////////// */
-/* ///////////////////////////////////////////////////////////////////////// */
+/* ************************************************************************** */
+/* ************************************************************************** */
