@@ -52,6 +52,10 @@ void double_linked_list_free(double_linked_list* _List)
 
    double_linked_list_clear(_List);  
 
+   free(_List->m_head);
+
+   free(_List->m_tail);
+
 }
 
 /* ************************************************************************** */
@@ -145,6 +149,43 @@ void* double_linked_list_pop_back(double_linked_list* _List)
       free(_List->m_tail->m_prev->m_next);
       
       _List->m_tail->m_prev->m_next = _List->m_tail;
+      
+      --_List->m_size;
+   
+   }
+
+   return _Return;
+
+}
+
+void* double_linked_list_pop_front(double_linked_list* _List)
+{
+
+   void* _Return;
+
+   _Return = _List->m_head->m_next->m_data;
+
+   if (_List->m_size == 1)
+   {
+
+      free(_List->m_tail->m_prev);
+      
+      _List->m_size = 0;
+      
+      _List->m_tail->m_prev = _List->m_head;
+   
+      _List->m_head->m_next = _List->m_tail;
+   
+   }
+
+   else
+   {
+
+      _List->m_head->m_next = _List->m_head->m_next->m_next;
+
+      free(_List->m_head->m_next->m_prev);
+      
+      _List->m_head->m_next->m_prev = _List->m_head;
       
       --_List->m_size;
    

@@ -1,5 +1,8 @@
 #include "array.h"
 #include "double_linked_list.h"
+#include "queue.h"
+#include "stack.h"
+#include "vector.h"
 
 void test_array()
 {
@@ -49,7 +52,7 @@ void test_array()
 void test_double_linked_list()
 {
 
-   int _Count;
+   int _Count, _Size;
 
    double_linked_list _List;
 
@@ -91,16 +94,138 @@ void test_double_linked_list()
 
    **_Pointer = 105;
 
-   for (_Count = 0; _Count < double_linked_list_size(&_List); ++_Count) printf("%d\n", **(int**)double_linked_list_at(&_List, _Count));
+   for (_Count = 0, _Size = double_linked_list_size(&_List); _Count < _Size; ++_Count) printf("%d\n", *(int*)double_linked_list_pop_front(&_List));
 
    double_linked_list_free(&_List);
+
+}
+
+void test_queue()
+{
+
+   int _Count, _Size;
+
+   int* _S = malloc(sizeof(int));
+
+   int* _Int = malloc(sizeof(int));
+
+   *_S = 10;
+
+   *_Int = 100;
+
+   queue _Queue;
+
+   queue_create(&_Queue);
+
+   queue_push(&_Queue, _S);
+
+   queue_push(&_Queue, _Int);
+
+   for (_Count = 0, _Size = queue_size(&_Queue); _Count < _Size; ++_Count) printf("%d\n", *(int*)queue_pop(&_Queue));
+
+   queue_free(&_Queue);
+
+   free(_S);
+   free(_Int);
+
+}
+
+void test_stack()
+{
+
+   int _Count, _Size;
+
+   int* _S = malloc(sizeof(int));
+
+   int* _Int = malloc(sizeof(int));
+
+   *_S = 10;
+
+   *_Int = 100;
+
+   stack _Stack;
+
+   stack_create(&_Stack);
+
+   stack_push(&_Stack, _S);
+
+   stack_push(&_Stack, _Int);
+
+   for (_Count = 0, _Size = stack_size(&_Stack); _Count < _Size; ++_Count) printf("%d\n", *(int*)stack_pop(&_Stack));
+
+   stack_free(&_Stack);
+
+   free(_S);
+
+   free(_Int);
+
+}
+
+void test_vector()
+{
+
+   int _Count, _Size;
+
+   vector _Vector;
+
+   int** _Pointer;
+
+   int* _S = malloc(sizeof(int));
+
+   int* _Int = malloc(sizeof(int));
+
+   *_S = 10;
+
+   *_Int = 100;
+
+   vector_create(&_Vector);
+
+   vector_push_back(&_Vector, _S);
+
+   vector_push_back(&_Vector, _Int);
+
+   _Pointer = (int**)vector_front(&_Vector);
+
+   **_Pointer = 25;
+
+   *(*(_Pointer + 1)) = 301;
+
+   vector_clear(&_Vector);
+
+   for (_Count = 0, _Size = 100; _Count < _Size; ++_Count)
+   {
+
+      int* _Point = malloc(sizeof(int));
+
+      *_Point = _Count;
+
+      vector_push_back(&_Vector, _Point);
+
+   }
+
+   for (_Count = 0, _Size = vector_size(&_Vector); _Count < _Size; ++_Count) 
+   {
+
+      int* _Point = (int*)vector_pop_back(&_Vector);
+
+      printf("%d\n", *_Point);
+
+      free(_Point);
+
+   }
+
+   vector_free(&_Vector);
+
+   free(_Int);
+
+   free(_S);
 
 }
 
 int main()
 {
 
-   test_double_linked_list();
+   test_vector();
 
    return 0;
 

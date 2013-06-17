@@ -28,9 +28,9 @@ void vector_create(vector* _Vector)
    
    _Vector->m_array = (void**)malloc(sizeof(void*) * BASE_VECTOR_SIZE);
 
-   _Vector->size = 0;
+   _Vector->m_size = 0;
    
-   _Vector->max_size = BASE_VECTOR_SIZE;
+   _Vector->m_max_size = BASE_VECTOR_SIZE;
 
 }
 
@@ -44,17 +44,17 @@ void vector_free(vector* _Vector)
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-void* vector_at(vector* _Vector, int _Position)
+void** vector_at(vector* _Vector, int _Position)
 {
 
-   return _Vector->m_array[_Position];
+   return &_Vector->m_array[_Position];
 
 }
 
-void* vector_back(vector* _Vector)
+void** vector_back(vector* _Vector)
 {
 
-   return _Vector->m_array[_Vector->m_size - 1];
+   return &_Vector->m_array[_Vector->m_size - 1];
 
 }
 
@@ -67,9 +67,9 @@ void vector_clear(vector* _Vector)
 
 }
 
-void* vector_front(vector* _Vector)
+void** vector_front(vector* _Vector)
 {
-   return _Vector->m_array[0];
+   return &_Vector->m_array[0];
 }
 
 void vector_insert(vector* _Vector, void* _Data, int _Position)
@@ -80,13 +80,13 @@ void vector_insert(vector* _Vector, void* _Data, int _Position)
 
    #if DEBUG
 
-      if (_Position > _Vector->size - 1) return;
+      if (_Position > _Vector->m_size - 1) return;
 
    #endif
 
-   if ( (_Vector->size + 1) >= _Vector->max_size)
+   if ( (_Vector->m_size + 1) >= _Vector->m_max_size)
    {
-      vector_resize(_Vector, _Vector->max_size * 2);
+      vector_resize(_Vector, _Vector->m_max_size * 2);
    }
 
    for (_Count = _Vector->m_size - 1; _Count > _Position; ++_Count)
@@ -127,7 +127,7 @@ void vector_push_back(vector* _Vector, void* _Data)
    if ( (_Vector->m_size + 1) >= _Vector->m_max_size)
    {
 
-      resize_vector(_Vector, _Vector->max_size * 2);
+      vector_resize(_Vector, _Vector->m_max_size * 2);
    
    }
 
@@ -144,7 +144,7 @@ void vector_remove(vector* _Vector, int _Position)
 
    #if DEBUG
 
-      if (_Position > _Vector->size - 1 || _Vector->size == 0) return;
+      if (_Position > _Vector->m_size - 1 || _Vector->m_size == 0) return;
 
    #endif
 

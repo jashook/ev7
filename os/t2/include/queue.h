@@ -26,11 +26,27 @@
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
+#ifdef __unix__
 
-#include "linked_list.h"
+   #include <stdlib.h>
+   #include <stdio.h>
+   #include <string.h>
+
+#elif WIN32
+
+   #include <stdlib.h>
+   #include <stdio.h>
+   #include <string.h>
+
+#else
+
+   #include "stdlib.h"
+   #include "stdio.h"
+   #include "string.h"
+
+#endif
+
+#include "double_linked_list.h"
 
 /* ************************************************************************** */
 /* ************************************************************************** */
@@ -59,7 +75,7 @@ void queue_free(queue*);
 /* general functions for a stack */
 
 void queue_push(queue*, void*);
-void* pop_queue(queue*);
+void* queue_pop(queue*);
 int size_queue(queue*);
 
 /* ************************************************************************** */

@@ -30,9 +30,9 @@
 void stack_create(stack* _Stack)
 {
 
-   double_linked_list* _List = malloc(sizeof(double_linked_list));
+   _Stack->m_list = malloc(sizeof(double_linked_list));
 
-   _Stack->m_list = double_linked_list_create(_List);
+   double_linked_list_create(_Stack->m_list);
 
 }
 
@@ -41,6 +41,8 @@ void stack_free(stack* _Stack)
 
    double_linked_list_free(_Stack->m_list);
 
+   free(_Stack->m_list);
+
 }
 
 /* ************************************************************************** */
@@ -48,14 +50,14 @@ void stack_free(stack* _Stack)
 
 /* general functions for a stack */
 
-void stack_pop(stack* _Stack)
+void* stack_pop(stack* _Stack)
 {
 
    return double_linked_list_pop_back(_Stack->m_list);
 
 }
 
-void push_stack(stack* _Stack, void* _Data)
+void stack_push(stack* _Stack, void* _Data)
 {
 
    double_linked_list_push_back(_Stack->m_list, _Data);
