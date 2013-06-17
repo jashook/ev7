@@ -41,8 +41,8 @@
 typedef struct double_linked_list
 {
    
-   double_linked_list_node* m_head;
-   double_linked_list_node* m_tail;
+   double_linked_list_node m_head;
+   double_linked_list_node m_tail;
    int m_size;
 
 } double_linked_list;

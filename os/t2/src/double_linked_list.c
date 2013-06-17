@@ -32,11 +32,16 @@ void double_linked_list_create(double_linked_list* _List)
 {
 
    _List->m_head = malloc(sizeof(double_linked_list_node));
+   
    _List->m_tail = malloc(sizeof(double_linked_list_node));
 
    memset(_List->m_head, 0, sizeof(double_linked_list_node));
 
    memset(_List->m_tail, 0, sizeof(double_linked_list_node));
+
+   _List->m_head->m_next = _List->m_tail;
+
+   _List->m_tail->m_prev = _List->m_head;
 
    _List->_size = 0;
 
