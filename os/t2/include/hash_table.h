@@ -45,6 +45,8 @@
 
 #endif
 
+#include "array.h"
+#include "pair.h"
 #include "vector.h"
 
 /* ************************************************************************** */
@@ -60,7 +62,7 @@ typedef struct hash_table
    size_t m_capacity;
    size_t m_collisions;
 
-   double_linked_list* m_list;
+   vector* m_vector;
 
 } hash_table;
 
@@ -84,7 +86,7 @@ size_t hash_table_collisions(hash_table*);
 int hash_table_contains(hash_table*, void*, size_t (*)(void*));
 void hash_table_insert(hash_table*, void*, void*, size_t (*)(void*));
 void hash_table_remove(hash_table*, void*, size_t (*)(void*));
-void* hash_table_search(hash_table*, void*, size_t (*)(void*);
+void* hash_table_search(hash_table*, void*, size_t (*)(void*));
 size_t hash_table_size(hash_table*);
 
 /* ************************************************************************** */

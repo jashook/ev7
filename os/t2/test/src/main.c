@@ -1,5 +1,6 @@
 #include "array.h"
 #include "double_linked_list.h"
+#include "hash_table.h"
 #include "queue.h"
 #include "stack.h"
 #include "vector.h"
@@ -100,6 +101,36 @@ void test_double_linked_list()
 
 }
 
+size_t test_hash_function(void* _Item)
+{
+
+   int _Integer = *((int*)_Item);
+
+   return _Integer * 1031;
+
+}
+
+void test_hash_table()
+{
+
+   hash_table _HashTable;
+
+   hash_table_create(&_HashTable, 1000);
+
+   int* _Pointer = malloc(sizeof(int));
+
+   int* _Int = malloc(sizeof(int));
+
+   *_Pointer = 5;
+
+   *_Int = 100;
+
+   hash_table_insert(&_HashTable, _Pointer, _Pointer, &test_hash_function);
+
+   printf("%d\n", (int)hash_table_capacity(&_HashTable));
+
+}
+
 void test_queue()
 {
 
@@ -178,7 +209,7 @@ void test_vector()
 
    *_Int = 100;
 
-   vector_create(&_Vector);
+   vector_create(&_Vector, 100);
 
    vector_push_back(&_Vector, _S);
 
@@ -225,7 +256,7 @@ void test_vector()
 int main()
 {
 
-   test_vector();
+   test_hash_table();
 
    return 0;
 
