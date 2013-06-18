@@ -23,10 +23,12 @@
 
 const int BASE_VECTOR_SIZE = 10;
 
-void vector_create(vector* _Vector)
+void vector_create(vector* _Vector, size_t _Size)
 {
    
-   _Vector->m_array = (void**)malloc(sizeof(void*) * BASE_VECTOR_SIZE);
+   if (_Size > BASE_VECTOR_SIZE) _Vector->m_array = (void**)malloc(sizeof(void*) * _Size);
+
+   else _Vector->m_array = (void**)malloc(sizeof(void*) * BASE_VECTOR_SIZE);
 
    _Vector->m_size = 0;
    

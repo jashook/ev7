@@ -33,6 +33,7 @@ typedef struct avl_tree_node
 
 typedef struct bn_tree_node
 {
+   void* m_key;
    void* m_data;
    struct bn_tree_node* m_left;
    struct bn_tree_node* m_right;
@@ -46,6 +47,15 @@ typedef struct double_linked_list_node
    struct double_linked_list_node* m_next;
 
 } double_linked_list_node;
+
+typedef struct hash_node
+{
+
+   void* m_key;
+   void* m_data;
+   linked_list_node* m_next;
+
+} hash_node;
 
 typedef struct linked_list_node
 {

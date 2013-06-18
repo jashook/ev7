@@ -3,95 +3,95 @@
 /*                                                                            */
 /* Author: Jarret Shook                                                       */
 /*                                                                            */
-/* Module: vector.h                                                           */
+/* Module: hash_table.h                                                       */
 /*                                                                            */
 /* Modifications:                                                             */
 /*                                                                            */
-/* 17-June-13: Version 2.0: Last Updated                                      */
-/* 17-June-13: Version 2.0: Updated to ev7 and began bug fixing               */
-/* 27-Dec-12: Version 1.1: Renamed from ArrayList to vector                   */
-/* 22-Oct-12: Version 1.0: Created                                            */
+/* 17-June-13: Version 1.0: Last Updated                                      */
+/* 17-June-13: Version 1.0: Created                                           */
 /*                                                                            */
-/* Version: 1.1                                                               */
+/* Version: 1.0                                                               */
 /*                                                                            */
 /* Timeperiod: ev7                                                            */
 /*                                                                            */
-/* Notes: An empty vector is defined to be a vector struct that has size 0    */
-/*        To properly allocate and free memory, use the create and delete     */
-/*        functions                                                           */
+/* Notes: To Properly use and free memory use the create or delete functions  */
 /*                                                                            */
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-#ifndef __VECTOR_H__
-#define __VECTOR_H__
+#ifndef __HASH_TABLE_H__
+#define __HASH_TABLE_H__
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
 #ifdef __unix__
 
-   #include <stdio.h>
    #include <stdlib.h>
+   #include <stdio.h>
    #include <string.h>
 
 #elif WIN32
 
-   #include <stdio.h>
    #include <stdlib.h>
+   #include <stdio.h>
    #include <string.h>
 
 #else
 
-   #include "stdio.h"
    #include "stdlib.h"
+   #include "stdio.h"
    #include "string.h"
 
 #endif
+
+#include "vector.h"
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
 /* type definitions */
 
-typedef struct vector
+typedef struct hash_table
 {
-   void** m_array;
-   int m_size;
-   int m_max_size;
+   
+   array* m_array;
+   size_t m_size;
+   size_t m_capacity;
+   size_t m_collisions;
 
-} vector;
+   linked_list_node* m_head;
+   linked_list_node* m_current;
 
-extern const int BASE_VECTOR_SIZE;
-
-/* ************************************************************************** */
-/* ************************************************************************** */
-
-/* functions for creating and delete a vector */
-
-void vector_create(vector*, size_t);
-void vector_free(vector*);
+} hash_table;
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-/* general functions for a vector */
+/* functions for creating and deleting a hash_table struct */
 
-void** vector_at(vector*, int);
-void** vector_back(vector*);
-void vector_clear(vector*);
-void** vector_front(vector*);
-void vector_insert(vector*, void*, int);
-void* vector_pop_back(vector*);
-void vector_push_back(vector*, void*);
-void vector_remove(vector*, int);
-void vector_resize(vector*, int);
-int vector_size(vector*);
+void hash_table_create(hash_table*, size_t);
+
+void hash_table_free(hash_table*);
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-#endif   /* __VECTOR_H__ */
+/* general functions for a hash_table */
+
+size_t hash_table_capacity(hash_table*);
+void hash_table_clear(hash_table*);
+size_t hash_table_collisions(hash_table*);
+int hash_table_contains(hash_table*, void*, size_t (*)(void*));
+void hash_table_insert(hash_table*, void*, void*, size_t (*)(void*));
+void hash_table_remove(hash_table*, void*, size_t (*)(void*));
+void* hash_table_search(hash_table*, void*, size_t (*)(void*);
+size_t hash_table_size(hash_table*);
+
+/* ************************************************************************** */
+/* ************************************************************************** */
+
+#endif /* __HASH_TABLE_H__ */
 
 /* ************************************************************************** */
 /* ************************************************************************** */
