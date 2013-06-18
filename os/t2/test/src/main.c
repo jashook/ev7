@@ -127,7 +127,11 @@ void test_hash_table()
 
    hash_table_insert(&_HashTable, _Pointer, _Pointer, &test_hash_function);
 
-   printf("%d\n", (int)hash_table_capacity(&_HashTable));
+   printf("%d\n", hash_table_contains(&_HashTable, _Pointer, &test_hash_function));
+
+   hash_table_clear(&_HashTable);
+
+   printf("%d\n", hash_table_contains(&_HashTable, _Pointer, &test_hash_function));
 
 }
 

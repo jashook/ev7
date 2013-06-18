@@ -83,10 +83,10 @@ void hash_table_free(hash_table*);
 size_t hash_table_capacity(hash_table*);
 void hash_table_clear(hash_table*);
 size_t hash_table_collisions(hash_table*);
-int hash_table_contains(hash_table*, void*, size_t (*)(void*));
+int hash_table_contains(hash_table*, void*, int (*)(void*, void*), size_t (*)(void*));
 void hash_table_insert(hash_table*, void*, void*, size_t (*)(void*));
-void hash_table_remove(hash_table*, void*, size_t (*)(void*));
-void* hash_table_search(hash_table*, void*, size_t (*)(void*));
+void hash_table_remove(hash_table*, void*, int (*)(void*, void*), size_t (*)(void*));
+void* hash_table_search(hash_table*, void*, int (*)(void*, void*), size_t (*)(void*));
 size_t hash_table_size(hash_table*);
 
 /* ************************************************************************** */

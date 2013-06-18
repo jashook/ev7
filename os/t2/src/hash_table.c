@@ -87,7 +87,7 @@ size_t hash_table_collisions(hash_table* _Table)
 
 }
 
-int hash_table_contains(hash_table* _Table, void* _Key, size_t (*_Hash)(void*))
+int hash_table_contains(hash_table* _Table, void* _Key, int (*_Compare)(void*, void*), size_t (*_Hash)(void*))
 {
 
    int _Count, _Size;   
@@ -99,7 +99,7 @@ int hash_table_contains(hash_table* _Table, void* _Key, size_t (*_Hash)(void*))
    for (_Count = 0, _Size = vector_size(_Vector); _Count < _Size; ++_Count)
    {
 
-      if ((*(pair**)vector_at(_Vector, _Count))->m_first == _Key) return 1;
+      if (_Compare((*(pair**)vector_at(_Vector, _Count))->m_first, _Key)) return 1;
 
       else continue;
 
@@ -114,19 +114,21 @@ void hash_table_insert(hash_table* _Table, void* _Key, void* _Data, size_t (*_Ha
 
    pair* _KeyPair = (pair*)malloc(sizeof(pair));
 
-   vector* _Vector = *(vector**)(array_at(_Table->m_array, _Hash(_Key) % _Table->m_capacity));
+   vector** _Vector;
+
+   _Vector = (vector**)(array_at(_Table->m_array, _Hash(_Key) % _Table->m_capacity));
 
    _KeyPair->m_first = _Key;
    _KeyPair->m_second = _Data;
 
-   if (_Vector == NULL)
+   if (*_Vector == NULL)
    {
 
-      _Vector = (vector*)malloc(sizeof(vector));
+      *(vector**)(array_at(_Table->m_array, _Hash(_Key) % _Table->m_capacity)) = (vector*)malloc(sizeof(vector));
 
-      vector_create(_Vector, 5);
+      vector_create(*_Vector, 5);
 
-      vector_push_back(_Table->m_vector, _Vector);
+      vector_push_back(_Table->m_vector, *_Vector);
    
    }
 
@@ -137,11 +139,11 @@ void hash_table_insert(hash_table* _Table, void* _Key, void* _Data, size_t (*_Ha
 
    }
 
-   vector_push_back(_Vector, _KeyPair);
+   vector_push_back(*_Vector, _KeyPair);
 
 }
 
-void hash_table_remove(hash_table* _Table, void* _Key, size_t(*_Hash)(void*))
+void hash_table_remove(hash_table* _Table, void* _Key, int (*_Compare)(void*, void*), size_t(*_Hash)(void*))
 {
 
    int _Count, _Size;   
@@ -153,7 +155,7 @@ void hash_table_remove(hash_table* _Table, void* _Key, size_t(*_Hash)(void*))
    for (_Count = 0, _Size = vector_size(_Vector); _Count < _Size; ++_Count)
    {
 
-      if ((*(pair**)vector_at(_Vector, _Count))->m_first == _Key) vector_remove(_Vector, _Count);
+      if (_Compare((*(pair**)vector_at(_Vector, _Count))->m_first, _Key)) vector_remove(_Vector, _Count);
 
       else continue;
 
@@ -161,7 +163,7 @@ void hash_table_remove(hash_table* _Table, void* _Key, size_t(*_Hash)(void*))
 
 }
 
-void* hash_table_search(hash_table* _Table, void* _Key, size_t (*_Hash)(void*))
+void* hash_table_search(hash_table* _Table, void* _Key, int (*_Compare)(void*, void*), size_t (*_Hash)(void*))
 {
 
    int _Count, _Size;
@@ -170,12 +172,10 @@ void* hash_table_search(hash_table* _Table, void* _Key, size_t (*_Hash)(void*))
 
    if (_Vector == NULL) return 0;
 
-   if (_Vector == NULL) return 0;
-
    for (_Count = 0, _Size = vector_size(_Vector); _Count < _Size; ++_Count)
    {
 
-      if ((*(pair**)vector_at(_Vector, _Count))->m_first == _Key) return (*(pair**)vector_at(_Vector, _Count))->m_second;
+      if (_Compare((*(pair**)vector_at(_Vector, _Count))->m_first, _Key)) return (*(pair**)vector_at(_Vector, _Count))->m_second;
 
       else continue;
 
