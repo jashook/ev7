@@ -20,21 +20,25 @@
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-/* functions for creating and deleting a hash_table struct */
+/* functions for managing a hash_table struct */
 
 void hash_table_create(hash_table* _Table, size_t _Size)
 {
 
-   _Table->m_array = (vector*)malloc(sizeof(array));
+   _Table->m_array = (array*)malloc(sizeof(array));
+
+   _Table->m_list = (double_linked_list*)malloc(sizeof(double_linked_list));
 
    array_create(_Table->m_array, _Size);
+
+   double_linked_list_create(_Table->m_list);
+
+   memset(_Table->m_array->m_array, 0, _Table->m_array->m_capacity);
 
    _Table->m_size = _Table->m_collisions = 0;
 
    _Table->m_capacity = _Size;
 
-   _Table->m_head = _Table->m_current = 0;
-   
 }
 
 void hash_table_free(hash_table* _Table)
@@ -42,7 +46,9 @@ void hash_table_free(hash_table* _Table)
 
    hash_table_clear(_Table);
 
-   array_free(_table->m_array);
+   array_free(_Table->m_array);
+
+   double_linked_list_free(_Table->m_list);
 
 }
 
@@ -106,25 +112,26 @@ int hash_table_contains(hash_table* _Table, void* _Key, size_t (*_Hash)(void*))
 void hash_table_insert(hash_table* _Table, void* _Key, void* _Data, size_t (*_Hash)(void*))
 {
 
-   hash_node* _Node = (hash_node*)malloc(sizeof(hash_node));
+   pair* _KeyPair = (pair*)malloc(sizeof(pair));
 
-   hash_node* _NodeSpot = *(hash_node**)(array_at(_Table->m_array, _Hash(_Key) % _Table->m_capacity));
+   double_linked_list* _List = *(double_linked_list**)(array_at(_Table->m_array, _Hash(_Key) % _Table->m_capacity));
 
-   _Node->m_key = _Key;
-   _Node->m_data = _Data;
+   _KeyTuple->m_first = _Key;
+   _KeyTuple->m_second = _Data;
 
-   if (_NodeSpot != NULL)
+   if (_List != NULL)
    {
 
-      while (_NodeSpot->m_next != NULL) _NodeSpot = _NodeSpot->m_next;
+      _List = (double_linked_list*)malloc(sizeof(double_linked_list));
 
-      _NodeSpot->m_next = _Node;
+      double_linked_list_create(_List);
 
+
+      double_linked_list_push_back(_Table->m_list, _List);
+   
    }
 
-   if (_Table->m_size == 0) _Table->m_head = _Node;
-
-   else _Table->m_current->m_next = _Node; _Table->m_current = _Node;
+   double_linked_list_push_back(_List, _KeyTuple);
 
 }
 

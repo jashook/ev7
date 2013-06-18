@@ -60,8 +60,7 @@ typedef struct hash_table
    size_t m_capacity;
    size_t m_collisions;
 
-   linked_list_node* m_head;
-   linked_list_node* m_current;
+   double_linked_list* m_list;
 
 } hash_table;
 
