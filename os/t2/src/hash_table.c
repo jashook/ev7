@@ -67,20 +67,16 @@ size_t hash_table_capacity(hash_table* _Table)
 void hash_table_clear(hash_table* _Table)
 {
 
-   linked_list_node* _Pointer, *_BehindPointer = _Table->m_head;
+   int _Count, _Size;
 
-   while (_Pointer != 0)
+   for (_Count = 0, _Size = double_linked_list_size(_Table->m_list); _Count < _Size; ++_Count)
    {
 
-      _Pointer = _Pointer->m_next;
-
-      free (_BehindPointer);
-
-      _BehindPointer = _Pointer;
+      double_linked_list_free(*(double_linked_list**)double_linked_list_at(_Table->m_list), _Count);
 
    }
 
-   _Table->m_size = 0;
+   memset(_Table->m_array->m_array, 0, _Table->m_capacity);
 
 }
 
@@ -94,14 +90,18 @@ size_t hash_table_collisions(hash_table* _Table)
 int hash_table_contains(hash_table* _Table, void* _Key, size_t (*_Hash)(void*))
 {
 
-   hash_node* _Node = (hash_node*)(*array_at(_Table->m_array, _Hash(_Key) % _Table->m_capacity));
+   int _Count, _Size;   
 
-   if (_Node == NULL) return 0;
+   double_linked_list* _List = (double_linked_list*)(*(double_linked_list**)array_at(_Table->m_array, _Hash(_Key) % _Table->m_capacity));
 
-   while (_Node != NULL)
+   if (_List == NULL) return 0;
+
+   for (_Count = 0, _Size = double_linked_list_size(_List); _Count < _Size; ++_Count)
    {
 
-      _Node->m_key == _Key ? return 1 : _Node = _Node->m_next; continue;
+      if (*(pair**)double_linked_list_at(_List, _Count)->m_first == _Key) return 1;
+
+      else continue;
 
    }
 
@@ -126,9 +126,15 @@ void hash_table_insert(hash_table* _Table, void* _Key, void* _Data, size_t (*_Ha
 
       double_linked_list_create(_List);
 
-
       double_linked_list_push_back(_Table->m_list, _List);
    
+   }
+
+   else
+   {
+
+      ++_Table->m_colisions;
+
    }
 
    double_linked_list_push_back(_List, _KeyTuple);
@@ -138,54 +144,20 @@ void hash_table_insert(hash_table* _Table, void* _Key, void* _Data, size_t (*_Ha
 void hash_table_remove(hash_table* _Table, void* _Key, size_t(*_Hash)(void*))
 {
 
-   hash_node* _Node = (hash_node*)(*array_at(_Table->m_array, _Hash(_Key) % _Table->m_capacity));
+   int _Count, _Size;   
 
-   hash_node* _PreviousNode = _Node;
+   double_linked_list* _List = (double_linked_list*)(*(double_linked_list**)array_at(_Table->m_array, _Hash(_Key) % _Table->m_capacity));
 
-   if (_Node == NULL) return;
+   if (_List == NULL) return;
 
-   if (_Node->_Key == _Key)
+   for (_Count = 0, _Size = double_linked_list_size(_List); _Count < _Size; ++_Count)
    {
 
-      _Node = _Node->m_next;
+      if (*(pair**)double_linked_list_at(_List, _Count)->m_first == _Key) double_linked_list_remove(_List, _Count);
 
-      free(_Node)      
-
-   }
-
-   else
-   {
-
-      _Node = _Node->m_next;
+      else continue;
 
    }
-
-   while (_Node != NULL)
-   {
-      
-      if (_Node->m_key == _Key)
-      {
-
-         _PreviousNode->m_next = _Node->m_next;
-
-         free(_Node);  
-
-      }
-
-      else
-      {
-
-         _Node = _Node->m_next;
-
-         _PreviousNode = _PreviousNode->m_next;
-
-         continue;
-
-      }
-
-   }
-
-   return; /* default is false */
 
 }
 
