@@ -3,56 +3,74 @@
 /*                                                                            */
 /* Author: Jarret Shook                                                       */
 /*                                                                            */
-/* Module: stdlib.h                                                           */
+/* Module: bn_tree.h                                                          */
 /*                                                                            */
 /* Modifications:                                                             */
 /*                                                                            */
-/* 13-June-13: Version 1.0: Last Updated                                      */
-/* 13-June-13: Version 1.0: Created                                           */
-/*                                                                            */
-/* Version: 1.0                                                               */
+/* 21-June-13: Version 1.0: Last Updated                                      */
+/* 21-June-13: Version 1.0: Created                                           */
 /*                                                                            */
 /* Timeperiod: ev7                                                            */
 /*                                                                            */
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-#ifndef __STDLIB_H__
-#define __STDLIB_H__
+#ifndef __BN_TREE_H__
+#define __BN_TREE_H__
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-#include "bn_tree.h"
+#ifdef __unix__
+
+   #include <stdlib.h>
+
+#elif WIN32
+
+   #include <stdlib.h>
+
+#else
+
+   #include "stdlib.h"
+
+#endif
+
+
 #include "node.h"
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-typedef struct malloc_node
+typedef struct bn_tree
 {
+   struct bn_tree_node m_root;
    size_t m_size;
-   void* m_memory;
 
-} malloc_node;
-
-/* ************************************************************************** */
-/* ************************************************************************** */
-
-bn_tree malloc_tree;
+} bn_tree;
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-char* itoa(int, char*, int);
-void free(void*);
-void* malloc(size_t);
-char* uitoa(unsigned int, char*, int);
+/* functions for creating and freeing a bn_tree struct */
+
+void bn_tree_create(bn_tree*);
+
+void bn_tree_free(bn_tree*);
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-#endif /* __STDLIB_H__ */
+int bn_tree_contains(bn_tree*, void*, int (*)(void*, void*));
+void bn_tree_free_with_children(bn_tree_node*);
+void bn_tree_insert(bn_tree*, void*, void*, int (*)(void*, void*));
+void bn_tree_remove(bn_tree*, void*, int (*)(void*, void*));
+void* bn_tree_search(bn_tree*, void*, int (*)(void*, void*));
+int bn_tree_size(bn_tree*);
+
+/* ************************************************************************** */
+/* ************************************************************************** */
+
+#endif /* __BN_TREE_H__ */
 
 /* ************************************************************************** */
 /* ************************************************************************** */
