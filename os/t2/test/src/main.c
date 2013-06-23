@@ -1,9 +1,20 @@
+#include "algorithm.h"
 #include "array.h"
 #include "double_linked_list.h"
 #include "hash_table.h"
 #include "queue.h"
 #include "stack.h"
 #include "vector.h"
+
+int compare(void* _First, void* _Second)
+{
+
+   if (*((int*)_First) < *((int*)_Second)) return -1;
+   else if (*((int*)_First) > *((int*)_Second)) return 1;
+
+   else return 0;
+
+}
 
 void test_array()
 {
@@ -127,11 +138,42 @@ void test_hash_table()
 
    hash_table_insert(&_HashTable, _Pointer, _Pointer, &test_hash_function);
 
-   printf("%d\n", hash_table_contains(&_HashTable, _Pointer, &test_hash_function));
+   printf("%d\n", hash_table_contains(&_HashTable, _Pointer, &compare ,&test_hash_function));
 
    hash_table_clear(&_HashTable);
 
-   printf("%d\n", hash_table_contains(&_HashTable, _Pointer, &test_hash_function));
+   printf("%d\n", hash_table_contains(&_HashTable, _Pointer, &compare, &test_hash_function));
+
+}
+
+void test_merge_sorted()
+{
+
+   const int SIZE = 2;
+
+   int _Index;
+
+   int* _Array = malloc(sizeof(int) * 2);
+
+   int* _Array2 = malloc(sizeof(int) * 2);
+
+   int* _Array3 = malloc(sizeof(int) * 3);
+
+   _Array[0] = 100;
+   _Array[1] = 200;
+
+   _Array2[0] = 5;
+   _Array2[1] = 500;
+   
+   merge_sorted(_Array3, _Array, _Array2, 2, 2, sizeof(int), &compare);
+
+   for (_Index = 0; _Index < SIZE * 2; ++_Index) printf("%d ", _Array3[_Index]);
+
+   printf("\n");
+
+   free(_Array);
+   free(_Array2);
+   free(_Array3);
 
 }
 
@@ -260,7 +302,7 @@ void test_vector()
 int main()
 {
 
-   test_hash_table();
+   test_merge_sorted();
 
    return 0;
 

@@ -35,7 +35,7 @@
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-int strcmp(const char* _String1, const char* _String2)
+int str_cmp(const char* _String1, const char* _String2)
 {
 
    int _ReturnValue = 0;
@@ -92,7 +92,7 @@ int strcmp(const char* _String1, const char* _String2)
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-void strcpy(char* _Destination, const char* _Source)
+void str_cpy(char* _Destination, const char* _Source)
 {
 
    while(*_Source != '\0') *_Destination++ = *_Source++;
@@ -116,7 +116,7 @@ void strcpy(char* _Destination, const char* _Source)
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-int strlen(const char* _String)
+int str_len(const char* _String)
 {
 
    int _Count;
@@ -146,13 +146,13 @@ int strlen(const char* _String)
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-void* memcpy(void* _DestinationArray, void* _SourceArray, size_t _NumberOfElements)
+void* mem_cpy(void* _DestinationArray, void* _SourceArray, size_t _NumberOfElements)
 {
 
    char* _DestinationArrayBytes = (char*)_DestinationArray;
    char* _SourceArrayBytes = (char*)_SourceArray;
 
-   while(--_NumberOfElements)
+   while(_NumberOfElements--)
    {
 
       *_DestinationArrayBytes++ = *_SourceArrayBytes++;
@@ -182,7 +182,7 @@ void* memcpy(void* _DestinationArray, void* _SourceArray, size_t _NumberOfElemen
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-void memset(void* _Array, int _Value, size_t _Size)
+void mem_set(void* _Array, int _Value, size_t _Size)
 {
    
    size_t _Count;

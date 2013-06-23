@@ -7,7 +7,7 @@
 /*                                                                            */
 /* Modifications:                                                             */
 /*                                                                            */
-/* 14-June-13: Last Updated                                                   */
+/* 22-June-13: Last Updated                                                   */
 /* 14-June-13: Version 1.0: Style change and updated to ev7                   */
 /* 21-Feb-13: Version 1.0: Created                                            */
 /*                                                                            */
@@ -24,8 +24,35 @@
 /* ************************************************************************** */
 /* ************************************************************************** */
 
+#ifdef __unix__
+
+   #include <stdio.h>
+   #include <stdlib.h>
+   #include <string.h>
+
+#elif WIN32
+
+   #include <stdio.h>
+   #include <stdlib.h>
+   #include <string.h>
+
+#else
+
+   #include "stdio.h"
+   #include "stdlib.h"
+   #include "string.h"
+
+#endif
+
+#include "string1.h"
+
+/* ************************************************************************** */
+/* ************************************************************************** */
+
 void* min(void*, void*, int (*)(void*, void*));
+void merge_sorted(void*, void*, void*, size_t, size_t, size_t, int (*)(void*, void*));
 void* max(void*, void*, int (*)(void*, void*));
+void mege_sort(void*, size_t, size_t, int (*)(void*, void*));
 
 /* ************************************************************************** */
 /* ************************************************************************** */
