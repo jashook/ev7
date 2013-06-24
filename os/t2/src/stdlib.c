@@ -118,7 +118,55 @@ void free(void* _Memory)
 void* malloc(size_t _Size)
 {
 
+   static char* _s_malloc_array;
+   static size_t _s_current_size = 0;
+
+   char* _ReturnPointer = 0;
+   _Size = next_power_of_two(_Size);
+
+   if (_Size > _s_current_size)
+   {
+
+      if (!_s_malloc_array) _s_malloc_array = sysbrk(MALLOC_SIZE);
+      
+      /* check free list for memory */
+
+      else
+      {
+
+         if (_CurrentSize < MALLOC_UPDATE_THRESHOLD)
+         {
+
+            /* This operation will tolerate a memory leak of < 256 bytes */
+
+            _s_malloc_array = sysbrk(MALLOC_SIZE);
+
+            _s_current_size = MALLOC_SIZE;
+
+         }
+
+         else 
+         {
+
+            /* if larger than 1MB then get the memory from the operating system directly */
+            return sysbrk(_Size);
+
+         }
+
+      }
+
+   }
+
+   _ReturnPointer = _s_malloc_array;
+
+   _s_malloc_array += _Size;
+
+   _s_current_size += _Size;
+
+   return (void*)_ReturnPointer;
+
 }
+
 
 /* ************************************************************************** */
 /* ************************************************************************** */

@@ -34,83 +34,6 @@ void* max(void* _First, void* _Second, int (*_Compare)(void*, void*))
    else return _First;
 }
 
-void merge_sorted(void* _DestinationArray, void* _FirstArray, void* _SecondArray, size_t _FirstSize, size_t _SecondSize, size_t _ElementSize, int (*_compare)(void*, void*))
-{
-   
-   int _Index;
-
-   int _DestinationSize = _FirstSize + _SecondSize;
-
-   int _FirstEndIndex = _FirstSize - 1;
-   int _SecondEndIndex = _SecondSize - 1;
-
-   for (_Index = _DestinationSize - 1; _Index >= 0; --_Index)
-   {
-
-      /* ************************************************** */
-      /* Compare to see which is larger                     */
-      /* ************************************************** */
-
-      if (_FirstEndIndex < 0) 
-      {
-
-         char* _DestinationPointer = (char*)_DestinationArray;
-         char* _SecondArrayPointer = (char*)_SecondArray;
-
-         memcpy((void*)(_DestinationPointer + ((_Index) * _ElementSize)), (void*)(_SecondArrayPointer + (_SecondEndIndex-- * _ElementSize)), _ElementSize);
-
-         continue;
-
-      }
-
-      if (_SecondEndIndex < 0)
-      {
-
-         char* _DestinationPointer = (char*)_DestinationArray;
-         char* _FirstArrayPointer = (char*)_FirstArray;
-
-         memcpy((void*)(_DestinationPointer + ((_Index) * _ElementSize)), (void*)(_FirstArrayPointer + (_FirstEndIndex-- * _ElementSize)), _ElementSize);
-
-         continue;
-         
-      }
-
-      else if (_compare((void*)((char*)(_FirstArray + (_FirstEndIndex * (_ElementSize / sizeof(char))))), (void*)((char*)(_SecondArray + (_SecondEndIndex * (_ElementSize / sizeof(char)))))) > 0)
-      {
-   
-         char* _DestinationPointer = (char*)_DestinationArray;
-         char* _FirstArrayPointer = (char*)_FirstArray;
-
-         memcpy((void*)(_DestinationPointer + ((_Index) * _ElementSize)), (void*)(_FirstArrayPointer + (_FirstEndIndex-- * _ElementSize)), _ElementSize);
-
-      }   
-   
-      else if (_SecondEndIndex >= 0)
-      {   
-
-         char* _DestinationPointer = (char*)_DestinationArray;
-         char* _SecondArrayPointer = (char*)_SecondArray;
-
-         memcpy((void*)(_DestinationPointer + ((_Index) * (_ElementSize / sizeof(char)))), (void*)(_SecondArrayPointer + (_SecondEndIndex-- * (_ElementSize / sizeof(char)))), _ElementSize);
-
-      }   
-
-
-   }
-
-}
-
-void* min(void* _First, void* _Second, int (*_Compare)(void*, void*))
-{
-   /* if the max is _First, then return _Second */
-
-   if (max(_First, _Second, _Compare) == _First) return _Second;
-
-   /* else if the max is _Second, return _First */
-   
-   else return _First;
-}
-
 void merge_sort(void* _Array, size_t _ArraySize, size_t _ElementSize, int (*_compare)(void*, void*))
 {
 
@@ -212,6 +135,108 @@ void merge_sort(void* _Array, size_t _ArraySize, size_t _ElementSize, int (*_com
 
    free(_ArrayCopy);
    free(_Buffer);
+
+}
+
+void merge_sorted(void* _DestinationArray, void* _FirstArray, void* _SecondArray, size_t _FirstSize, size_t _SecondSize, size_t _ElementSize, int (*_compare)(void*, void*))
+{
+   
+   int _Index;
+
+   int _DestinationSize = _FirstSize + _SecondSize;
+
+   int _FirstEndIndex = _FirstSize - 1;
+   int _SecondEndIndex = _SecondSize - 1;
+
+   for (_Index = _DestinationSize - 1; _Index >= 0; --_Index)
+   {
+
+      /* ************************************************** */
+      /* Compare to see which is larger                     */
+      /* ************************************************** */
+
+      if (_FirstEndIndex < 0) 
+      {
+
+         char* _DestinationPointer = (char*)_DestinationArray;
+         char* _SecondArrayPointer = (char*)_SecondArray;
+
+         memcpy((void*)(_DestinationPointer + ((_Index) * _ElementSize)), (void*)(_SecondArrayPointer + (_SecondEndIndex-- * _ElementSize)), _ElementSize);
+
+         continue;
+
+      }
+
+      if (_SecondEndIndex < 0)
+      {
+
+         char* _DestinationPointer = (char*)_DestinationArray;
+         char* _FirstArrayPointer = (char*)_FirstArray;
+
+         memcpy((void*)(_DestinationPointer + ((_Index) * _ElementSize)), (void*)(_FirstArrayPointer + (_FirstEndIndex-- * _ElementSize)), _ElementSize);
+
+         continue;
+         
+      }
+
+      else if (_compare((void*)((char*)(_FirstArray + (_FirstEndIndex * (_ElementSize / sizeof(char))))), (void*)((char*)(_SecondArray + (_SecondEndIndex * (_ElementSize / sizeof(char)))))) > 0)
+      {
+   
+         char* _DestinationPointer = (char*)_DestinationArray;
+         char* _FirstArrayPointer = (char*)_FirstArray;
+
+         memcpy((void*)(_DestinationPointer + ((_Index) * _ElementSize)), (void*)(_FirstArrayPointer + (_FirstEndIndex-- * _ElementSize)), _ElementSize);
+
+      }   
+   
+      else if (_SecondEndIndex >= 0)
+      {   
+
+         char* _DestinationPointer = (char*)_DestinationArray;
+         char* _SecondArrayPointer = (char*)_SecondArray;
+
+         memcpy((void*)(_DestinationPointer + ((_Index) * (_ElementSize / sizeof(char)))), (void*)(_SecondArrayPointer + (_SecondEndIndex-- * (_ElementSize / sizeof(char)))), _ElementSize);
+
+      }   
+
+
+   }
+
+}
+
+void* min(void* _First, void* _Second, int (*_Compare)(void*, void*))
+{
+   /* if the max is _First, then return _Second */
+
+   if (max(_First, _Second, _Compare) == _First) return _Second;
+
+   /* else if the max is _Second, return _First */
+   
+   else return _First;
+}
+
+unsigned long next_power_of_two(unsigned long _Integer)
+{
+
+   /* 32 bit precision only */
+
+   /* taken from http://graphics.stanford.edu/~seander/bithacks.html#RoundUpPowerOf2Float */
+
+    --_Integer;
+
+    _Integer |= _Integer >> 1;
+
+    _Integer |= _Integer >> 2;
+
+    _Integer |= _Integer >> 4;
+
+    _Integer |= _Integer >> 8;
+
+    _Integer |= _Integer >> 16;
+
+    ++_Integer;
+
+    return _Integer;
 
 }
 

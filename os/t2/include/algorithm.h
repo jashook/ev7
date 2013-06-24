@@ -49,10 +49,12 @@
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-void* min(void*, void*, int (*)(void*, void*));
-void merge_sorted(void*, void*, void*, size_t, size_t, size_t, int (*)(void*, void*));
+
 void* max(void*, void*, int (*)(void*, void*));
+void merge_sorted(void*, void*, void*, size_t, size_t, size_t, int (*)(void*, void*));
 void mege_sort(void*, size_t, size_t, int (*)(void*, void*));
+void* min(void*, void*, int (*)(void*, void*));
+unsigned long next_power_of_2(unsigned long);
 
 /* ************************************************************************** */
 /* ************************************************************************** */
