@@ -57,7 +57,7 @@ void merge_sorted(void* _DestinationArray, void* _FirstArray, void* _SecondArray
          char* _DestinationPointer = (char*)_DestinationArray;
          char* _SecondArrayPointer = (char*)_SecondArray;
 
-         mem_cpy((void*)(_DestinationPointer + ((_FirstEndIndex + _SecondEndIndex + 1) * _ElementSize)), (void*)(_SecondArrayPointer + (_SecondEndIndex-- * _ElementSize)), _ElementSize);
+         mem_cpy((void*)(_DestinationPointer + ((_Index) * _ElementSize)), (void*)(_SecondArrayPointer + (_SecondEndIndex-- * _ElementSize)), _ElementSize);
 
          continue;
 
@@ -91,7 +91,7 @@ void merge_sorted(void* _DestinationArray, void* _FirstArray, void* _SecondArray
          char* _DestinationPointer = (char*)_DestinationArray;
          char* _SecondArrayPointer = (char*)_SecondArray;
 
-         mem_cpy((void*)(_DestinationPointer + ((_FirstEndIndex + _SecondEndIndex + 1) * (_ElementSize / sizeof(char)))), (void*)(_SecondArrayPointer + (_SecondEndIndex-- * (_ElementSize / sizeof(char)))), _ElementSize);
+         mem_cpy((void*)(_DestinationPointer + ((_Index) * (_ElementSize / sizeof(char)))), (void*)(_SecondArrayPointer + (_SecondEndIndex-- * (_ElementSize / sizeof(char)))), _ElementSize);
 
       }   
 
@@ -114,28 +114,45 @@ void* min(void* _First, void* _Second, int (*_Compare)(void*, void*))
 void merge_sort(void* _Array, size_t _ArraySize, size_t _ElementSize, int (*_compare)(void*, void*))
 {
 
+   int _Count;
+
    void* _ArrayCopy = malloc(_ElementSize * _ArraySize);
    void* _Buffer = malloc(_ElementSize * _ArraySize);
 
    size_t _Size = 1; /* smallest size possible */
 
+   size_t _Groups = 1;
+
+   size_t _IncrementSize;
+
    /* ***************************************************** */
    /* Make a copy of the array                              */
    /* ***************************************************** */
 
-   memcpy(_ArrayCopy, _Array, _ArraySize);
+   memcpy(_ArrayCopy, _Array, _ArraySize * _ElementSize);
+
+   for (_Count = 0; _Count < _ArraySize; ++_Count) printf("%d ", *((int*)_Array + _Count));
+
+   printf("\n");
 
    while (_Size <= _ArraySize)
    {
       
       int _SortLastPair = 0;
 
+      void* _TempPointer;
+
       /* amount of partitions in the array */
       size_t _Pairs = _ArraySize / _Size;
 
       size_t _Index;
 
-      void* _TempPointer;
+      _Groups = _Pairs / 2;
+
+      _IncrementSize = _ArraySize / _Groups;
+   
+      _IncrementSize % 2 == 0 ? _IncrementSize = _IncrementSize : ++_IncrementSize;
+
 
       if (_Pairs % 2 != 0)
       {
@@ -146,20 +163,37 @@ void merge_sort(void* _Array, size_t _ArraySize, size_t _ElementSize, int (*_com
 
       }
 
-      for (_Index = 1; _Index < _Pairs + 1; ++_Index)
+      for (_Index = 0; _Index < _Groups; ++_Index)
       {
 
-         int _FirstEndIndex = _Index * _Size - 1;
-         int _SecondEndIndex = (_Index + 1) * _Size - 1;
+         printf("--------------------------------------------------------------\n");
+
+         for (_Count = 0; _Count < _ArraySize; ++_Count) printf("%d ", *((int*)_ArrayCopy + _Count));
+
+         printf("\n");
+
+
+         int _FirstEndIndex = _IncrementSize * _Size - 1;
+         int _SecondEndIndex = (_IncrementSize + 1) * _Size - 1;
 
          int _FirstBeginningIndex = _FirstEndIndex - (_Size - 1);
          int _SecondBeginningIndex = _SecondEndIndex - (_Size - 1);
 
-         if (_Index == _Pairs) _SecondEndIndex = _Index * _Size;
+         printf("_FirstBeginningIndex = %d\n_FirstEndIndex = %d\n", _FirstBeginningIndex, _FirstEndIndex);
+
+         printf("SecondBeginningIndex = %d\n_SecondEndIndex = %d\n", _SecondBeginningIndex, _SecondEndIndex);
 
          char* _ArrayAsBytes = (char*)_ArrayCopy;
 
-         merge_sorted(_Buffer, (void*)(_ArrayAsBytes + (_FirstBeginningIndex * _ElementSize)), (void*)(_ArrayAsBytes + (_SecondBeginningIndex * _ElementSize)), _Size, _Size, _ElementSize, _compare);
+         char* _BufferAsBytes = (char*)_Buffer;
+
+         /* if (_IncrementSize == _Pairs) _SecondEndIndex = _Index * _Size; */
+
+         merge_sorted((void*)(_BufferAsBytes + (_FirstBeginningIndex * _ElementSize)) , (void*)(_ArrayAsBytes + (_FirstBeginningIndex * _ElementSize)), (void*)(_ArrayAsBytes + (_SecondBeginningIndex * _ElementSize)), _Size, _Size, _ElementSize, _compare);
+
+         for (_Count = 0; _Count < _ArraySize; ++_Count) printf("%d ", *((int*)_Buffer + _Count));
+
+         printf("\n");
 
       }
 
@@ -169,12 +203,28 @@ void merge_sort(void* _Array, size_t _ArraySize, size_t _ElementSize, int (*_com
          int _EndIndex = (_Pairs + 1) * _Size - 1;
          int _BeginningIndex = _EndIndex - (_Size - 1);
 
-         int _PreviousEndingIndex = _Pairs * _Size - 1;
+         /*
+
+         int _PreviousEndingIndex = _Pairs * _Size - 0;
          int _PreviousBeginningIndex = _BeginningIndex - (_Size * 2 - 1);
 
-         merge_sorted((void*)((char*)(_ArrayCopy + (_PreviousBeginningIndex * _ElementSize))), (void*)((char*)(_Buffer + (_PreviousBeginningIndex * _ElementSize))), (void*)((char*)(_Buffer + (_BeginningIndex * _ElementSize))), _Size * 2, _Size, _ElementSize, _compare);
+         */
 
-         memcpy(_Buffer, _ArrayCopy, _EndIndex - _PreviousBeginningIndex - 1);
+         printf("_BeginningIndex = %d\n_EndIndex = %d\n", _BeginningIndex, _EndIndex);
+
+         /* 
+
+         printf("_PreviousBeginningIndex = %d\n_PreviousEndingIndex = %d\n", _PreviousBeginningIndex, _PreviousEndingIndex);
+
+         merge_sorted((void*)((char*)(_ArrayCopy + (_PreviousBeginningIndex * _ElementSize))), (void*)((char*)(_Buffer + (_PreviousBeginningIndex * _ElementSize))), (void*)((char*)(_Buffer + (_BeginningIndex * _ElementSize))), _Size * 2, _Size, _ElementSize, _compare);
+   
+         */
+
+         memcpy((void*)(((char*)_Buffer + (_BeginningIndex * _ElementSize))), (void*)(((char*)_ArrayCopy) + (_BeginningIndex * _ElementSize)), ((_EndIndex - _BeginningIndex) + 1) * _ElementSize);
+
+         for (_Count = 0; _Count < _ArraySize; ++_Count) printf("%d ", *((int*)_Buffer + _Count));
+
+         printf("\n");
 
       }
 
@@ -190,7 +240,7 @@ void merge_sort(void* _Array, size_t _ArraySize, size_t _ElementSize, int (*_com
 
    }
 
-   memcpy(_Array, _ArrayCopy, _ArraySize);
+   memcpy(_Array, _ArrayCopy, _ArraySize * _ElementSize);
 
 }
 

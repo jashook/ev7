@@ -146,28 +146,57 @@ void test_hash_table()
 
 }
 
-void test_merge_sorted()
+void test_merge_sort()
 {
-
-   const int SIZE = 2;
 
    int _Index;
 
-   int* _Array = malloc(sizeof(int) * 2);
+   int* _Array = malloc(sizeof(int) * 6);
 
-   int* _Array2 = malloc(sizeof(int) * 2);
+   _Array[5] = 100;
+   _Array[4] = 200;
+   _Array[3] = 300;
+   _Array[2] = 400;
+   _Array[1] = 600;
+   _Array[0] = 700;
 
-   int* _Array3 = malloc(sizeof(int) * 3);
+   merge_sort(_Array, 6, sizeof(int), &compare);
+
+   for (_Index = 0; _Index < 6; ++_Index) printf("%d ", _Array[_Index]);
+
+   printf("\n");
+
+   free(_Array);
+
+}
+
+void test_merge_sorted()
+{
+
+   int _Index;
+
+   int* _Array = malloc(sizeof(int) * 6);
+
+   int* _Array2 = malloc(sizeof(int) * 5);
+
+   int* _Array3 = malloc(sizeof(int) * 11);
 
    _Array[0] = 100;
    _Array[1] = 200;
+   _Array[2] = 300;
+   _Array[3] = 400;
+   _Array[4] = 600;
+   _Array[5] = 700;
 
    _Array2[0] = 5;
    _Array2[1] = 500;
+   _Array2[2] = 1050;
+   _Array2[3] = 1150;
+   _Array2[4] = 1250;
    
-   merge_sorted(_Array3, _Array, _Array2, 2, 2, sizeof(int), &compare);
+   merge_sorted(_Array3, _Array, _Array2, 6, 5, sizeof(int), &compare);
 
-   for (_Index = 0; _Index < SIZE * 2; ++_Index) printf("%d ", _Array3[_Index]);
+   for (_Index = 0; _Index < 11; ++_Index) printf("%d ", _Array3[_Index]);
 
    printf("\n");
 
@@ -302,7 +331,7 @@ void test_vector()
 int main()
 {
 
-   test_merge_sorted();
+   test_merge_sort();
 
    return 0;
 
