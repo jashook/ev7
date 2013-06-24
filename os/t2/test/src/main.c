@@ -146,23 +146,22 @@ void test_hash_table()
 
 }
 
-void test_merge_sort()
+void test_merge_sort(int _Size)
 {
+
+   int SIZE = _Size;
 
    int _Index;
 
-   int* _Array = malloc(sizeof(int) * 6);
+   int* _Array = malloc(sizeof(int) * SIZE);
 
-   _Array[5] = 100;
-   _Array[4] = 200;
-   _Array[3] = 300;
-   _Array[2] = 400;
-   _Array[1] = 600;
-   _Array[0] = 700;
+   int _Count = 100 * SIZE;
 
-   merge_sort(_Array, 6, sizeof(int), &compare);
+   for (_Index = 0; _Index < SIZE; ++_Index, _Count -= 100) _Array[_Index] = _Count;
 
-   for (_Index = 0; _Index < 6; ++_Index) printf("%d ", _Array[_Index]);
+   merge_sort(_Array, SIZE, sizeof(int), &compare);
+
+   for (_Index = 0; _Index < SIZE; ++_Index) printf("%d ", _Array[_Index]);
 
    printf("\n");
 
@@ -328,10 +327,10 @@ void test_vector()
 
 }
 
-int main()
+int main(int argc, char** _Argv)
 {
 
-   test_merge_sort();
+   test_merge_sort(atoi(_Argv[1]));
 
    return 0;
 
