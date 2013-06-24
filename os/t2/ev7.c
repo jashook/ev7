@@ -29,7 +29,7 @@ extern "C" /* Use C linkage for entry */
 void ev7_main()
 {
 
-   printf("Hello World");
+   printf("Hello World")
 
 }
 

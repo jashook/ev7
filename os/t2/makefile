@@ -1,7 +1,7 @@
-FILES := $(wildcard src/*.c)
+FILES := $(wildcard kernel/src/*.c)
 TESTSRC := $(wildcard test/src/*.c)
 
-INCLUDE := include
+INCLUDE := kernel/include
 TESTINCLUDE := test/include
 
 all: debug clean make_iso

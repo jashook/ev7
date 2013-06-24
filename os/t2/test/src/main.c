@@ -1,4 +1,5 @@
 #include "algorithm.h"
+#include "bn_tree.h"
 #include "array.h"
 #include "double_linked_list.h"
 #include "hash_table.h"
@@ -155,9 +156,9 @@ void test_merge_sort(int _Size)
 
    int* _Array = malloc(sizeof(int) * SIZE);
 
-   int _Count = 100 * SIZE;
+   int _Count = SIZE;
 
-   for (_Index = 0; _Index < SIZE; ++_Index, _Count -= 100) _Array[_Index] = _Count;
+   for (_Index = 0; _Index < SIZE; ++_Index, --_Count) _Array[_Index] = _Count;
 
    merge_sort(_Array, SIZE, sizeof(int), &compare);
 

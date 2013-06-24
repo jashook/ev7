@@ -24,17 +24,21 @@
 #ifdef __unix__
 
    #include <stdlib.h>
+   #include <string.h>
 
 #elif WIN32
 
    #include <stdlib.h>
+   #include <string.h>
 
 #else
 
    #include "stdlib.h"
+   #include "string.h"
 
 #endif
 
+#include <stddef.h>
 
 #include "node.h"
 

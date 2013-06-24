@@ -45,6 +45,8 @@
 
 #endif
 
+#include <stddef.h>
+
 #include "array.h"
 #include "pair.h"
 #include "vector.h"

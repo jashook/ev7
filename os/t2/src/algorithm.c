@@ -57,7 +57,7 @@ void merge_sorted(void* _DestinationArray, void* _FirstArray, void* _SecondArray
          char* _DestinationPointer = (char*)_DestinationArray;
          char* _SecondArrayPointer = (char*)_SecondArray;
 
-         mem_cpy((void*)(_DestinationPointer + ((_Index) * _ElementSize)), (void*)(_SecondArrayPointer + (_SecondEndIndex-- * _ElementSize)), _ElementSize);
+         memcpy((void*)(_DestinationPointer + ((_Index) * _ElementSize)), (void*)(_SecondArrayPointer + (_SecondEndIndex-- * _ElementSize)), _ElementSize);
 
          continue;
 
@@ -69,7 +69,7 @@ void merge_sorted(void* _DestinationArray, void* _FirstArray, void* _SecondArray
          char* _DestinationPointer = (char*)_DestinationArray;
          char* _FirstArrayPointer = (char*)_FirstArray;
 
-         mem_cpy((void*)(_DestinationPointer + ((_Index) * _ElementSize)), (void*)(_FirstArrayPointer + (_FirstEndIndex-- * _ElementSize)), _ElementSize);
+         memcpy((void*)(_DestinationPointer + ((_Index) * _ElementSize)), (void*)(_FirstArrayPointer + (_FirstEndIndex-- * _ElementSize)), _ElementSize);
 
          continue;
          
@@ -81,7 +81,7 @@ void merge_sorted(void* _DestinationArray, void* _FirstArray, void* _SecondArray
          char* _DestinationPointer = (char*)_DestinationArray;
          char* _FirstArrayPointer = (char*)_FirstArray;
 
-         mem_cpy((void*)(_DestinationPointer + ((_Index) * _ElementSize)), (void*)(_FirstArrayPointer + (_FirstEndIndex-- * _ElementSize)), _ElementSize);
+         memcpy((void*)(_DestinationPointer + ((_Index) * _ElementSize)), (void*)(_FirstArrayPointer + (_FirstEndIndex-- * _ElementSize)), _ElementSize);
 
       }   
    
@@ -91,7 +91,7 @@ void merge_sorted(void* _DestinationArray, void* _FirstArray, void* _SecondArray
          char* _DestinationPointer = (char*)_DestinationArray;
          char* _SecondArrayPointer = (char*)_SecondArray;
 
-         mem_cpy((void*)(_DestinationPointer + ((_Index) * (_ElementSize / sizeof(char)))), (void*)(_SecondArrayPointer + (_SecondEndIndex-- * (_ElementSize / sizeof(char)))), _ElementSize);
+         memcpy((void*)(_DestinationPointer + ((_Index) * (_ElementSize / sizeof(char)))), (void*)(_SecondArrayPointer + (_SecondEndIndex-- * (_ElementSize / sizeof(char)))), _ElementSize);
 
       }   
 

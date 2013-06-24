@@ -27,9 +27,27 @@
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
+#ifdef __unix__
+
+   #include <stdlib.h>
+   #include <stdio.h>
+   #include <string.h>
+
+#elif WIN32
+
+   #include <stdio.h>
+   #include <stdlib.h>
+   #include <string.h>
+
+#else
+   
+   #include "stdio.h"
+   #include "stdlib.h"
+   #include "string.h"
+
+#endif
+
+#include <stddef.h>
 
 /* ************************************************************************** */
 /* ************************************************************************** */

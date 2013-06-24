@@ -35,7 +35,7 @@
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-int str_cmp(const char* _String1, const char* _String2)
+int strcmp(const char* _String1, const char* _String2)
 {
 
    int _ReturnValue = 0;
@@ -92,7 +92,7 @@ int str_cmp(const char* _String1, const char* _String2)
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-void str_cpy(char* _Destination, const char* _Source)
+void strcpy(char* _Destination, const char* _Source)
 {
 
    while(*_Source != '\0') *_Destination++ = *_Source++;
@@ -116,7 +116,7 @@ void str_cpy(char* _Destination, const char* _Source)
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-int str_len(const char* _String)
+int strlen(const char* _String)
 {
 
    int _Count;
@@ -146,7 +146,7 @@ int str_len(const char* _String)
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-void* mem_cpy(void* _DestinationArray, void* _SourceArray, size_t _NumberOfElements)
+void* memcpy(void* _DestinationArray, void* _SourceArray, size_t _NumberOfElements)
 {
 
    char* _DestinationArrayBytes = (char*)_DestinationArray;
@@ -182,7 +182,7 @@ void* mem_cpy(void* _DestinationArray, void* _SourceArray, size_t _NumberOfEleme
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-void mem_set(void* _Array, int _Value, size_t _Size)
+void memset(void* _Array, int _Value, size_t _Size)
 {
    
    size_t _Count;

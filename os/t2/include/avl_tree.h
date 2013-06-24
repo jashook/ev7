@@ -26,14 +26,32 @@
 /* ************************************************************************** */
 /* ************************************************************************** */
 
+#ifdef __unix__
+
+   #include <stdio.h>
+   #include <stdlib.h>
+   #include <string.h>
+
+#elif WIN32
+
+   #include <stdio.h>
+   #include <stdlib.h>
+   #include <string.h>
+
+#else
+   
+   #include "stdio.h"
+   #include "stdlib.h"
+   #include "string.h"
+
+#endif
+
+#include <stddef.h>
+
 #include "node.h"
 #include "queue.h"
 #include "stack.h"
 #include "vector.h"
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 
 /* ************************************************************************** */
 /* ************************************************************************** */
