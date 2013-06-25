@@ -26,6 +26,24 @@
 
 /* functions for creating and deleting an array struct */
 
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*   array_create                                                             */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*   array*: pointer to an array structure to be allocated                    */
+/*   size_t: a size to allocate the array to                                  */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*   void                                                                     */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
+
 void array_create(array* _Array, size_t _Size)
 {
 
@@ -42,6 +60,23 @@ void array_create(array* _Array, size_t _Size)
    #endif
 
 }
+
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    array_free                                                              */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    array*: pointer to an array structure to free                           */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    void                                                                    */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
 
 void array_free(array* _Array)
 {
@@ -60,10 +95,50 @@ void array_free(array* _Array)
 
 /* general functions for an array */
 
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    array_at                                                                */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    array*: pointer to an array structure to be used                        */
+/*    int: index of an array                                                  */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    void**: returns the pointer at location _Index by pointer               */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
+
 void** array_at(array* _Array, int _Index)
 {
    return array_at_safe(_Array, _Index);
 }
+
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    array_at_safe                                                           */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    array*: pointer to an array structure to be used                        */
+/*    int: index of the array                                                 */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    void**: returns the pointer at location _Index by pointer               */
+/*                                                                            */
+/* Notes:                                                                     */
+/*                                                                            */
+/*    if in debug mode then it will check to see if the array is in bounds    */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
 
 void** array_at_safe(array* _Array, int _Index)
 {
@@ -80,6 +155,20 @@ void** array_at_safe(array* _Array, int _Index)
 
    return (_Array->m_array + _Index);
 }
+
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    array_back                                                              */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    array*: pointer to an array structure to be used                        */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    void**: returns a pointer at location _Index
 
 void** array_back(array* _Array)
 {
