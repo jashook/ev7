@@ -23,6 +23,30 @@
 /* ************************************************************************** */
 /* ************************************************************************** */
 
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    max                                                                     */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    void*: first arguement to be compared                                   */
+/*    void*: second arguement to be compared                                  */
+/*    int (*)(void*, void*): pointer to a function that compares to types     */
+/*                         : passed by pointer and cast to void               */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    void*: the arguement that is larger                                     */
+/*                                                                            */
+/* Notes:                                                                     */
+/*                                                                            */
+/*    Generic max function                                                    */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
+
 void* max(void* _First, void* _Second, int (*_Compare)(void*, void*))
 {
    /* if _First is less than _Second, return _Second */
@@ -33,6 +57,32 @@ void* max(void* _First, void* _Second, int (*_Compare)(void*, void*))
    
    else return _First;
 }
+
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    merge_sort                                                              */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    void*: array to be sorted                                               */
+/*    size_t: size of the array                                               */
+/*    size_t: size of the elements in the array                               */
+/*    int (*)(void*, void*): pointer to a function that compares to types     */
+/*                         : passed by pointer and cast to void               */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    void                                                                    */
+/*                                                                            */
+/* Notes:                                                                     */
+/*                                                                            */
+/*    The original array will be overwritten by this function                 */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
+
 
 void merge_sort(void* _Array, size_t _ArraySize, size_t _ElementSize, int (*_compare)(void*, void*))
 {
@@ -138,6 +188,34 @@ void merge_sort(void* _Array, size_t _ArraySize, size_t _ElementSize, int (*_com
 
 }
 
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    merge_sorted                                                            */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    void*: the destination array to be merged into                          */
+/*    void*: the first array to be merged                                     */
+/*    void*: the second array to be merged                                    */
+/*    size_t: the first array to be merged's size                             */
+/*    size_t: the second array to be merged's size                            */
+/*    size_t: size of the elements stored in the arrays                       */
+/*    int (*)(void*, void*): pointer to a function that compares to types     */
+/*                         : passed by pointer and cast to void               */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    void                                                                    */
+/*                                                                            */
+/* Notes:                                                                     */
+/*                                                                            */
+/*    Note this will overwrite the contents of the _DestinationArray          */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
+
 void merge_sorted(void* _DestinationArray, void* _FirstArray, void* _SecondArray, size_t _FirstSize, size_t _SecondSize, size_t _ElementSize, int (*_compare)(void*, void*))
 {
    
@@ -204,6 +282,30 @@ void merge_sorted(void* _DestinationArray, void* _FirstArray, void* _SecondArray
 
 }
 
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    min                                                                     */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    void*: first arguement to be compared                                   */
+/*    void*: second arguement to be compared                                  */
+/*    int (*)(void*, void*): pointer to a function that compares to types     */
+/*                         : passed by pointer and cast to void               */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    void*: the arguement that is smaller                                    */
+/*                                                                            */
+/* Notes:                                                                     */
+/*                                                                            */
+/*    Generic min function                                                    */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
+
 void* min(void* _First, void* _Second, int (*_Compare)(void*, void*))
 {
    /* if the max is _First, then return _Second */
@@ -215,12 +317,33 @@ void* min(void* _First, void* _Second, int (*_Compare)(void*, void*))
    else return _First;
 }
 
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    next_power_of_two                                                       */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    unsigned long: integer to be find the next power of to of               */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    unsigned long: the value of the passed integer expressed as the next    */
+/*                 : power of two                                             */
+/*                                                                            */
+/* Notes:                                                                     */
+/*                                                                            */
+/*    taken from:                                                             */
+/*   http://graphics.stanford.edu/~seander/bithacks.html#RoundUpPowerOf2Float */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
+
 unsigned long next_power_of_two(unsigned long _Integer)
 {
 
    /* 32 bit precision only */
-
-   /* taken from http://graphics.stanford.edu/~seander/bithacks.html#RoundUpPowerOf2Float */
 
     --_Integer;
 

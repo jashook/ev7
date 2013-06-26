@@ -168,12 +168,36 @@ void** array_at_safe(array* _Array, int _Index)
 /*                                                                            */
 /* Returns:                                                                   */
 /*                                                                            */
-/*    void**: returns a pointer at location _Index
+/*    void**: returns a pointer to location _Index by pointer                 */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
 
 void** array_back(array* _Array)
 {
    return (_Array->m_array + _Array->m_size - 1);
 }
+
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    array_clear                                                             */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    array*: pointer to an array structure to be used                        */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    void                                                                    */
+/*                                                                            */
+/* Notes:                                                                     */
+/*                                                                            */
+/*    Same as array_empty                                                     */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
 
 void array_clear(array* _Array)
 {
@@ -182,15 +206,72 @@ void array_clear(array* _Array)
    memset(_Array->m_array, 0, _Array->m_capacity);
 }
 
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    array_empty                                                             */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    array*: pointer to an array structure to be used                        */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    void                                                                    */
+/*                                                                            */
+/* Notes:                                                                     */
+/*                                                                            */
+/*    Same as array_clear                                                     */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
+
 void array_empty(array* _Array)
 {
    array_clear(_Array);
 }
 
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    array_front                                                             */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    array*: pointer to an array structure to be used                        */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    void**: returns the index at location _Index by pointer                 */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
+
 void** array_front(array* _Array)
 {
    return _Array->m_array;
 }
+
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    array_insert                                                            */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    array*: pointer to an array structure to be used                        */
+/*    int: index to insert the pointer passed                                 */
+/*    void*: pointer to be inserted into the array                            */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    void                                                                    */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
 
 void array_insert(array* _Array, int _Index,  void* _Data)
 {
@@ -215,6 +296,23 @@ void array_insert(array* _Array, int _Index,  void* _Data)
 
 }
 
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    array_pop_back                                                          */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    array*: pointer to an array structure to be used                        */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    void*: returns the pointer at the last index of the array by value      */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
+
 void* array_pop_back(array* _Array)
 {
    #if DEBUG
@@ -230,6 +328,23 @@ void* array_pop_back(array* _Array)
 
    return _Array->m_array[_Array->m_size--];
 }
+
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    array_pop_front                                                         */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    array*: pointer to an array structure to be used                        */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    void*: returns the pointer at the first index of the array by value     */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
 
 void* array_pop_front(array* _Array)
 {
@@ -255,6 +370,24 @@ void* array_pop_front(array* _Array)
    return _Return;
 }
 
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    array_push_back                                                         */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    array*: pointer to an array structure to be used                        */
+/*    void*: pointer to be pushed back into the last index of the array       */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    void                                                                    */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
+
 void array_push_back(array* _Array, void* _Data)
 {
    #if DEBUG
@@ -271,6 +404,24 @@ void array_push_back(array* _Array, void* _Data)
    _Array->m_array[_Array->m_size++] = _Data;
 
 }
+
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    array_push_front                                                        */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    array*: pointer to an array structure to be used                        */
+/*    void*: pointer to be pushed back into the first index of the array      */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    void                                                                    */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
 
 void array_push_front(array* _Array, void* _Data)
 {
@@ -295,6 +446,24 @@ void array_push_front(array* _Array, void* _Data)
 
 }
 
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    array_remove                                                            */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    array*: pointer to an array structure to be used                        */
+/*    int: index of an array to be removed                                    */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    void                                                                    */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
+
 void array_remove(array* _Array, int _Index)
 {
    /* Note: Linear time removal */
@@ -315,6 +484,24 @@ void array_remove(array* _Array, int _Index)
    --_Array->m_size;
   
 }
+
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    array_shift_left                                                        */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    array*: pointer to an array structure to be used                        */
+/*    int: index of an array to start from                                    */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    void                                                                    */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
 
 void array_shift_left(array* _Array, int _Index)
 {
@@ -339,6 +526,24 @@ void array_shift_left(array* _Array, int _Index)
    }
 }
 
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    array_shift_right                                                       */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    array*: pointer to an array structure to be used                        */
+/*    int: index of an array to start from                                    */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    void                                                                    */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
+
 void array_shift_right(array* _Array, int _Index)
 {
    #if DEBUG
@@ -361,6 +566,23 @@ void array_shift_right(array* _Array, int _Index)
       _Array->m_array[i] = _Array->m_array[i - 1];
    }
 }
+
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    array_size                                                              */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    array*: pointer to an array structure to be used                        */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    int: size of the array                                                  */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
 
 int array_size(array* _Array)
 {
