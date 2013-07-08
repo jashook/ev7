@@ -8,62 +8,47 @@
 /* Modifications:                                                             */
 /*                                                                            */
 /* 30-June-13: Version 1.0: Last Updated                                      */
-/* 18-June-13: Version 1.0: Created                                           */
+/* 30-June-13: Version 1.0: Created                                           */
 /*                                                                            */
 /* Timeperiod: ev7                                                            */
 /*                                                                            */
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-#ifndef __PAIR_H__
-#define __PAIR_H__
+#include "pair.h"
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-#if __unix__
-   
-   #include <stdlib.h>
-
-#elif WIN32
-
-   #include <stdlib.h>
-
-#else
-
-   #include "stdlib.h"
-
-#endif
-
-/* ************************************************************************** */
-/* ************************************************************************** */
-
-typedef struct pair
+void tuple_create(tuple* _Tuple, int _Size)
 {
-   void* m_first;
-   void* m_second;
 
-} pair;
+   _Tuple->m_list = malloc(sizeof(void*) * _Size);
 
-typedef struct tuple
+}
+void tuple_free(tuple* _Tuple)
 {
-   void** m_list;
-   
-} tuple;
+
+   free(_Tuple->m_list);
+
+}
 
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-void tuple_init(tuple*, int);
-void tuple_free(tuple*);
+void* tuple_get(tuple* _Tuple, int _Index)
+{
 
-void* tuple_get(tuple*, int);
-void tuple_set(tuple*, int, void*);
+   return _Tuple->m_list[_Index];
 
-/* ************************************************************************** */
-/* ************************************************************************** */
+}
 
-#endif /* __PAIR_H__ */ 
+void tuple_set(tuple* _Tuple, int _Index, void* _Data)
+{
+
+   _Tuple->m_list[_Index] = _Data;
+
+}
 
 /* ************************************************************************** */
 /* ************************************************************************** */

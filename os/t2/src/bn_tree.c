@@ -22,6 +22,23 @@
 
 /* functions for creating and freeing a bn_tree struct */
 
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    bn_tree_create                                                          */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    bn_tree*: pointer to a bn_tree struct to be initialized                 */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    void                                                                    */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
+
 void bn_tree_create(bn_tree* _Tree)
 {
 
@@ -30,6 +47,23 @@ void bn_tree_create(bn_tree* _Tree)
    _Tree->m_size = 0;
 
 }
+
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    bn_tree_free                                                            */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    bn_tree*: pointer to a bn_tree struct to be freed                       */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    void                                                                    */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
 
 void bn_tree_free(bn_tree* _Tree)
 {
@@ -44,6 +78,26 @@ void bn_tree_free(bn_tree* _Tree)
 
 }
 
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    bn_tree_contains                                                        */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    bn_tree*: pointer to a bn_tree struct                                   */
+/*    void*: key to be used to compare                                        */
+/*    int (*)(void*, void*): compare function                                 */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    int: 1 if true, 0 if false                                              */
+/*                                                                            */
+/* Notes:                                                                     */
+/*                                                                            */
+/*    Generic contains function implemented using key value pairs             */
+/*                                                                            */
 /* ************************************************************************** */
 /* ************************************************************************** */
 
@@ -69,6 +123,23 @@ int bn_tree_contains(bn_tree* _Tree, void* _Key, int (*_compare)(void*, void*))
 
 }
 
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    bn_tree_free_with_children                                              */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    bn_tree*: pointer to a bn_tree struct                                   */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    void                                                                    */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
+
 void bn_tree_free_with_children(bn_tree_node* _Node)
 {
 
@@ -79,6 +150,30 @@ void bn_tree_free_with_children(bn_tree_node* _Node)
    free(_Node);
 
 }
+
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    bn_tree_insert                                                          */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    bn_tree*: pointer to a bn_tree struct                                   */
+/*    void*: key to be used to compare                                        */
+/*    void*: data                                                             */
+/*    int (*)(void*, void*): compare function                                 */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    void                                                                    */
+/*                                                                            */
+/* Notes:                                                                     */
+/*                                                                            */
+/*    Generic insert function implemented using key value pairs               */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
 
 void bn_tree_insert(bn_tree* _Tree, void* _Key, void* _Data, int (*_compare)(void*, void*))
 {
@@ -119,6 +214,29 @@ void bn_tree_insert(bn_tree* _Tree, void* _Key, void* _Data, int (*_compare)(voi
    ++_Tree->m_size;
 
 }
+
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    bn_tree_remove                                                          */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    bn_tree*: pointer to a bn_tree struct                                   */
+/*    void*: key to be used to compare                                        */
+/*    int (*)(void*, void*): compare function                                 */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    void                                                                    */
+/*                                                                            */
+/* Notes:                                                                     */
+/*                                                                            */
+/*    Generic remove function implemented using key value pairs               */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
 
 void bn_tree_remove(bn_tree* _Tree, void* _Key, int (*_compare)(void*, void*))
 {
@@ -166,6 +284,29 @@ void bn_tree_remove(bn_tree* _Tree, void* _Key, int (*_compare)(void*, void*))
 
  }
 
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    bn_tree_search                                                          */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    bn_tree*: pointer to a bn_tree struct                                   */
+/*    void*: key to be used to compare                                        */
+/*    int (*)(void*, void*): compare function                                 */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    void*: data to be found                                                 */
+/*                                                                            */
+/* Notes:                                                                     */
+/*                                                                            */
+/*    Returns null if the key is not found within the tree struct             */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
+
 void* bn_tree_search(bn_tree* _Tree, void* _Key, int (*_compare)(void*, void*))
 {
 
@@ -187,6 +328,23 @@ void* bn_tree_search(bn_tree* _Tree, void* _Key, int (*_compare)(void*, void*))
    return 0;
 
 }
+
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    bn_tree_size                                                            */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    bn_tree*: pointer to a bn_tree struct                                   */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    int: size of the tree struct                                            */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
 
 int bn_tree_size(bn_tree* _Tree)
 {
