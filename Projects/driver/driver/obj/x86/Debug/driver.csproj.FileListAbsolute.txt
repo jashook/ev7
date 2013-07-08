@@ -17,3 +17,12 @@ C:\Users\jarret\Documents\Visual Studio 2010\Projects\driver\driver\obj\x86\Debu
 C:\Users\jarret\Documents\Visual Studio 2010\Projects\driver\driver\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\Users\jarret\Documents\Visual Studio 2010\Projects\driver\driver\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\jarret\documents\visual studio 2010\Projects\driver\driver\bin\Debug\driver.exe.config
+C:\Users\Jarret\Documents\GitHub\ev7\Projects\driver\driver\bin\Debug\driver.exe.config
+C:\Users\Jarret\Documents\GitHub\ev7\Projects\driver\driver\obj\x86\Debug\driver.exe
+C:\Users\Jarret\Documents\GitHub\ev7\Projects\driver\driver\obj\x86\Debug\driver.pdb
+C:\Users\Jarret\Documents\GitHub\ev7\Projects\driver\driver\bin\Debug\driver.exe
+C:\Users\Jarret\Documents\GitHub\ev7\Projects\driver\driver\bin\Debug\driver.pdb
+C:\Users\Jarret\Documents\GitHub\ev7\Projects\driver\driver\obj\x86\Debug\driver.csprojResolveAssemblyReference.cache
+C:\Users\Jarret\Documents\GitHub\ev7\Projects\driver\driver\obj\x86\Debug\driver.Form1.resources
+C:\Users\Jarret\Documents\GitHub\ev7\Projects\driver\driver\obj\x86\Debug\driver.Properties.Resources.resources
+C:\Users\Jarret\Documents\GitHub\ev7\Projects\driver\driver\obj\x86\Debug\driver.csproj.GenerateResource.Cache

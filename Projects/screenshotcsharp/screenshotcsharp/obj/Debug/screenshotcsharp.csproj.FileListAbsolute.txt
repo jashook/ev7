@@ -1,0 +1,8 @@
+C:\Users\Jarret\Documents\GitHub\ev7\Projects\screenshotcsharp\screenshotcsharp\bin\Debug\screenshotcsharp.exe.config
+C:\Users\Jarret\Documents\GitHub\ev7\Projects\screenshotcsharp\screenshotcsharp\bin\Debug\screenshotcsharp.exe
+C:\Users\Jarret\Documents\GitHub\ev7\Projects\screenshotcsharp\screenshotcsharp\bin\Debug\screenshotcsharp.pdb
+C:\Users\Jarret\Documents\GitHub\ev7\Projects\screenshotcsharp\screenshotcsharp\obj\Debug\screenshotcsharp.csprojResolveAssemblyReference.cache
+C:\Users\Jarret\Documents\GitHub\ev7\Projects\screenshotcsharp\screenshotcsharp\obj\Debug\screenshotcsharp.Properties.Resources.resources
+C:\Users\Jarret\Documents\GitHub\ev7\Projects\screenshotcsharp\screenshotcsharp\obj\Debug\screenshotcsharp.csproj.GenerateResource.Cache
+C:\Users\Jarret\Documents\GitHub\ev7\Projects\screenshotcsharp\screenshotcsharp\obj\Debug\screenshotcsharp.exe
+C:\Users\Jarret\Documents\GitHub\ev7\Projects\screenshotcsharp\screenshotcsharp\obj\Debug\screenshotcsharp.pdb

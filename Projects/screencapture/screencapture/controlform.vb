@@ -11,79 +11,65 @@ Module controlform
 
     Sub Main(ByVal _Arguements() As String)
 
-        If (_Arguements.Length > 0) Then
+      If (_Arguements.Length > 0) Then
 
-            Dim _Thread As New Thread(AddressOf Run)
-            '_Thread.Start()
+         _g_pipe = _Arguements(0)
 
-            Using _PipeClient As New AnonymousPipeClientStream(PipeDirection.In, "1004")
+         Dim _Thread As New Thread(AddressOf Run)
+         _Thread.Start()
 
-                Using _StreamWriter As New StreamReader(_PipeClient)
+         Dim _Args, _Program
+         Dim _PictureCount As Integer
 
-                    Dim _Temp As String
+         _PictureCount = 0
 
-                    Do
+         SyncLock _g_lock_object
 
-                        _Temp = _StreamWriter.ReadLine()
+            While _g_continue
 
-                    Loop While _Temp.StartsWith("SYNC") = False
+               _Program = "E:\screenshot-cmd"
 
-                End Using
+               _Args = " -o " + Environment.GetCommandLineArgs(1) + Convert.ToString(_PictureCount)
 
-            End Using
+               _PictureCount = _PictureCount + 1
 
-            _g_pipe = _Arguements(0)
+               Console.WriteLine(_Program + _Args)
 
-            Console.WriteLine(_g_pipe)
+               Shell(_Program + _Args, AppWinStyle.Hide)
 
-            Dim _Args, _Program
-            Dim _PictureCount As Integer
+               Thread.Sleep(Convert.ToInt32(Environment.GetCommandLineArgs(2)) * 1000)
 
-            _PictureCount = 0
+            End While
 
-            SyncLock _g_lock_object
+         End SyncLock
 
-                While _g_continue
-
-                    _Program = "E:\screenshot-cmd"
-
-                    _Args = " -o " + Environment.GetCommandLineArgs(1) + Convert.ToString(_PictureCount)
-
-                    _PictureCount = _PictureCount + 1
-
-                    Console.WriteLine(_Program + _Args)
-
-                    Shell(_Program + _Args, AppWinStyle.Hide)
-
-                    Thread.Sleep(Convert.ToInt32(Environment.GetCommandLineArgs(2)) * 1000)
-
-                End While
-
-            End SyncLock
-
-        End If
+      End If
 
     End Sub
 
     Sub Run()
 
-        Console.WriteLine("HERE")
+      Console.WriteLine("HERE")
 
-        Using _PipeClient As New AnonymousPipeClientStream(PipeDirection.In, "1004")
+      Console.WriteLine(_g_pipe)
 
-            Using _StreamWriter As New StreamReader(_PipeClient)
+      Console.ReadLine()
 
-                Dim _Temp As String
+      Using _PipeClient As New AnonymousPipeClientStream(PipeDirection.In, _g_pipe)
 
-                Do
+         Using _StreamWriter As New StreamReader(_PipeClient)
 
-                    _Temp = _StreamWriter.ReadLine()
+            Dim _Temp As String
 
-                Loop While _Temp.StartsWith("SYNC") = False
+            Do
 
-            End Using
+               _Temp = _StreamWriter.ReadLine()
 
-        End Using
+            Loop While _Temp.StartsWith("SYNC") = False
+
+         End Using
+
+      End Using
 
         SyncLock _g_lock_object
 
