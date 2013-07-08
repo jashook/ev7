@@ -1,0 +1,10 @@
+C:\Users\jarret\Documents\Visual Studio 2010\Projects\start_driver\start_driver\bin\Debug\start_driver.exe
+C:\Users\jarret\Documents\Visual Studio 2010\Projects\start_driver\start_driver\bin\Debug\start_driver.pdb
+C:\Users\jarret\Documents\Visual Studio 2010\Projects\start_driver\start_driver\bin\Debug\start_driver.xml
+C:\Users\jarret\Documents\Visual Studio 2010\Projects\start_driver\start_driver\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\jarret\Documents\Visual Studio 2010\Projects\start_driver\start_driver\obj\x86\Debug\ConsoleApplication1.Resources.resources
+C:\Users\jarret\Documents\Visual Studio 2010\Projects\start_driver\start_driver\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\jarret\Documents\Visual Studio 2010\Projects\start_driver\start_driver\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\jarret\Documents\Visual Studio 2010\Projects\start_driver\start_driver\obj\x86\Debug\start_driver.exe
+C:\Users\jarret\Documents\Visual Studio 2010\Projects\start_driver\start_driver\obj\x86\Debug\start_driver.xml
+C:\Users\jarret\Documents\Visual Studio 2010\Projects\start_driver\start_driver\obj\x86\Debug\start_driver.pdb

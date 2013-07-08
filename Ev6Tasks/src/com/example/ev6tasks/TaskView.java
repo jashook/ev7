@@ -83,12 +83,12 @@ public class TaskView extends View
 			//_m_paint.setColor(_m_colors[_m_task_list.get(_Index).get_color()]);
 			
 			float x = _m_task_list.get(_Index).get_x();
-	        float y = _m_task_list.get(_Index).get_y();
+	      float y = _m_task_list.get(_Index).get_y();
 
-	        _m_paint.setColor(Color.BLACK);
-	        _Canvas.drawCircle(x, y, OUTER_SIZE, _m_paint);
-	        _m_paint.setColor(Color.WHITE);
-	        _Canvas.drawCircle(x, y, INNER_SIZE, _m_paint);
+	      _m_paint.setColor(Color.BLACK);
+	      _Canvas.drawCircle(x, y, OUTER_SIZE, _m_paint);
+	      _m_paint.setColor(Color.WHITE);
+	      _Canvas.drawCircle(x, y, INNER_SIZE, _m_paint);
 
 		}
 	}
@@ -113,6 +113,8 @@ public class TaskView extends View
 					
 					boolean _MoveForward = false;
 					boolean _MoveBackward = false;
+					
+					final Task[] _Tasks = _m_task_list.get(_Index).get_neighbors();
 					
 					for (int _InnerIndex = 0; _InnerIndex < _Index; ++_InnerIndex)
 					{
@@ -172,6 +174,8 @@ public class TaskView extends View
 				
 				Task _Task = new Task(_XCalcedValue, _YCalcedValue, 0);
 				_m_task_list.add(_Task);
+				
+				_update_list();
 				
 				Log.i("TOUCH", ":)");
 			}
@@ -239,6 +243,28 @@ public class TaskView extends View
 		if (_XPosition > _MinX && _XPosition < _MaxX && _YPosition > _MinY && _YPosition < _MaxY) _Return = true;
 		
 		return _Return;
+	}
+	
+	private void _update_list()
+	{
+	   
+	   int _LastIndex = _m_task_list.size() - 1;
+	   Task _LastTask = _m_task_list.get(_LastIndex);
+	   
+	   if (_LastIndex % 2 == 0)
+	   {
+	      
+	      Task _TopRight = _m_task_list.get(_LastIndex - 1);
+	      Task _Top = _m_task_list.get(_LastIndex - 2);
+	      
+	      _TopRight.set_bottom_left(_LastTask);
+	      _Top.set_bottom(_LastTask);
+	      
+	      _LastTask.set_top_right(_TopRight);
+	      _LastTask.set_top(_Top);
+	      
+	   }
+	   
 	}
 
 } // end of class TaskView

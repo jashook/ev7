@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "driver", "driver\driver.csproj", "{108C64F9-EBFC-41F8-A35C-4E13E1ABED23}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{108C64F9-EBFC-41F8-A35C-4E13E1ABED23}.Debug|x86.ActiveCfg = Debug|x86
+		{108C64F9-EBFC-41F8-A35C-4E13E1ABED23}.Debug|x86.Build.0 = Debug|x86
+		{108C64F9-EBFC-41F8-A35C-4E13E1ABED23}.Release|x86.ActiveCfg = Release|x86
+		{108C64F9-EBFC-41F8-A35C-4E13E1ABED23}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
