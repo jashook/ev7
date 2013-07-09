@@ -26,15 +26,14 @@ namespace screenshotcsharp
 
          int _PictureCount = 0;
 
-         
-         string _Program = "E:\\screenshot-cmd";
+         string _Program = "E:\\screenshot-cmd.exe";
 
          bool _Continue = true;
 
          while (_Continue)
          {
 
-            string _Args = " -o " + _Arguements[1] + Convert.ToString(_PictureCount++) + ".png";
+            string _Args = " -o " + _Arguements[0] + Convert.ToString(_PictureCount++) + ".png";
 
             Process _Process = new Process();
 
@@ -46,7 +45,7 @@ namespace screenshotcsharp
 
             _Process.Start();
 
-            Thread.Sleep(Convert.ToInt32(_Arguements[2]));
+            Thread.Sleep(Convert.ToInt32(_Arguements[1]));
 
             lock (_g_lock_object)
             {
