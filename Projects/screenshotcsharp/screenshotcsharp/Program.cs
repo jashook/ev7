@@ -38,7 +38,7 @@ namespace screenshotcsharp
             Process _Process = new Process();
 
             _Process.StartInfo.FileName = _Program;
-            _Process.StartInfo.UseShellExecute = true;
+            _Process.StartInfo.UseShellExecute = false;
             _Process.StartInfo.CreateNoWindow = true;
             _Process.StartInfo.RedirectStandardOutput = true;
             _Process.StartInfo.Arguments = _Args;
