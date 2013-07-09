@@ -10,43 +10,84 @@ namespace screenshotcsharp
 {
    static class Program
    {
+
+      static private bool _g_continue = true;
+      static private Object _g_lock_object = new Object();
+
       /// <summary>
       /// The main entry point for the application.
       /// </summary>
       //[STAThread]
-      static void Main(string[] args)
+      static void Main(string[] _Arguements)
       {
+         
+         Thread _Thread = new Thread(run);
+         _Thread.Start();
 
-         Console.ReadLine();
+         int _PictureCount = 0;
 
-         if (args.Length > -1)
+         
+         string _Program = "E:\\screenshot-cmd";
+
+         lock (_g_lock_object)
          {
-            NamedPipeClientStream pipeClient =
-                    new NamedPipeClientStream(".", "screenshotpipe", PipeDirection.InOut, PipeOptions.None, TokenImpersonationLevel.Impersonation);
 
-                Console.WriteLine("Connecting to server...\n");
-                pipeClient.Connect();
+            while (_g_continue)
+            {
 
-                using (StreamReader sr = new StreamReader(pipeClient))
-                {
-                   // Display the read text to the console 
-                   string temp;
+               string _Args = " -o " + _Arguements[1] + Convert.ToString(_PictureCount++);
 
-                   // Wait for 'sync message' from the server. 
-                   do
-                   {
-                      Console.WriteLine("[CLIENT] Wait for sync...");
-                      temp = sr.ReadLine();
-                   }
-                   while (!temp.StartsWith("SYNC"));
+               Process _Process = new Process();
 
-                }
+               _Process.StartInfo.FileName = _Program;
+               _Process.StartInfo.UseShellExecute = true;
+               _Process.StartInfo.CreateNoWindow = true;
+               _Process.StartInfo.RedirectStandardOutput = true;
+               _Process.StartInfo.Arguments = _Args;
 
-                pipeClient.Close();
+               _Process.Start();
+
+               Thread.Sleep(Convert.ToInt32(_Arguements[2]));
+   
             }
 
-         Console.Write("[CLIENT] Press Enter to continue...");
-         Console.ReadLine();
+         }
+
       }
+
+      static void run(Object _Data)
+      {
+
+         NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", "screenshotpipe", PipeDirection.InOut, PipeOptions.None, TokenImpersonationLevel.Impersonation);
+
+         Console.WriteLine("Connecting to server...\n");
+         pipeClient.Connect();
+
+         using (StreamReader sr = new StreamReader(pipeClient))
+         {
+            
+            string _Temp;
+
+            do
+            {
+
+              _Temp = sr.ReadLine();
+
+            }
+            while (!_Temp.StartsWith("SYNC"));
+
+         }
+
+         lock (_g_lock_object)
+         {
+
+            _g_continue = false;
+
+         }
+
+         pipeClient.Close();
+
+      }
+
    }
 }
