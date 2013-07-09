@@ -93,7 +93,6 @@ char* itoa(int _Integer, char* _String, int _Base)
 void free(void* _Memory)
 {
 
-   
 
 
 }
@@ -118,7 +117,7 @@ void free(void* _Memory)
 void* malloc(size_t _Size)
 {
 
-   static char* _s_malloc_array;
+   static char* _s_malloc_array = 0;
    static size_t _s_current_size = 0;
 
    char* _ReturnPointer = 0;
@@ -134,7 +133,7 @@ void* malloc(size_t _Size)
       else
       {
 
-         if (_CurrentSize < MALLOC_UPDATE_THRESHOLD)
+         if (_s_current_size < MALLOC_UPDATE_THRESHOLD)
          {
 
             /* This operation will tolerate a memory leak of < 256 bytes */
@@ -167,6 +166,97 @@ void* malloc(size_t _Size)
 
 }
 
+/* ************************************************************************** */
+/* ************************************************************************** */
+/* Function:                                                                  */
+/*                                                                            */
+/*    manage_free_list                                                        */
+/*                                                                            */
+/* Arguements:                                                                */
+/*                                                                            */
+/*    void* : pointer to a block of memory to be used with malloc             */
+/*    enum MALLOC_STATE: state in which to manage the free list               */
+/*                                                                            */
+/* Returns:                                                                   */
+/*                                                                            */
+/*    void*: pointer to a block of memory to be used by malloc                */
+/*                                                                            */
+/* ************************************************************************** */
+/* ************************************************************************** */
+
+void* manage_free_list(void* _Memory, MALLOC_STATE _State)
+{
+
+   static bn_tree* _s_tree = 0;
+
+   static hash_table* _s_mem_beg = 0;
+
+   static hash_table* _s_mem_end = 0;
+
+   static hash_table* _s_loaned_nodes = 0;
+
+   if (!_s_tree)
+   {
+      
+      _s_tree = (bn_tree*)malloc(sizeof(bn_tree));
+      
+      bn_tree_create(_s_tree);
+
+   }
+
+   if (!_s_mem_beg)
+   {
+
+      _s_mem_beg = (hash_table*)malloc(sizeof(hash_table));
+      
+      hash_table_create(_s_mem_beg, 10000); /* 40,000 byte hash table */
+
+   }
+
+   if (!_s_mem_end)
+   {
+
+      _s_mem_end = (hash_table*)malloc(sizeof(hash_table));
+
+      hash_table_create(_s_mem_end, 10000); /* 40,000 byte hash table */
+
+   }
+
+   if (!_s_loaned_nodes)
+   {
+
+      _s_loaned_nodex = (hash_table*)malloc(sizeof(hash_table));
+
+      hash_table_create(_s_loaned_nodes, 10000); /* 40,000 byte hash table */
+
+   }
+
+   switch (_State):
+   {
+
+      case MALLOC_REMOVE:
+      {
+      
+         break;
+
+      }
+
+      case MALLOC_INSERT:
+      {
+
+         break;
+
+      }
+
+      case MALLOC_UPDATE:
+      {
+
+         break;
+
+      }
+
+   }
+}
 
 /* ************************************************************************** */
 /* ************************************************************************** */
