@@ -29,30 +29,34 @@ namespace screenshotcsharp
          
          string _Program = "E:\\screenshot-cmd";
 
-         lock (_g_lock_object)
+         bool _Continue = true;
+
+         while (_Continue)
          {
 
-            while (_g_continue)
+            string _Args = " -o " + _Arguements[1] + Convert.ToString(_PictureCount++) + ".png";
+
+            Process _Process = new Process();
+
+            _Process.StartInfo.FileName = _Program;
+            _Process.StartInfo.UseShellExecute = true;
+            _Process.StartInfo.CreateNoWindow = true;
+            _Process.StartInfo.RedirectStandardOutput = true;
+            _Process.StartInfo.Arguments = _Args;
+
+            _Process.Start();
+
+            Thread.Sleep(Convert.ToInt32(_Arguements[2]));
+
+            lock (_g_lock_object)
             {
+               
+               _Continue = _g_continue;
 
-               string _Args = " -o " + _Arguements[1] + Convert.ToString(_PictureCount++);
-
-               Process _Process = new Process();
-
-               _Process.StartInfo.FileName = _Program;
-               _Process.StartInfo.UseShellExecute = true;
-               _Process.StartInfo.CreateNoWindow = true;
-               _Process.StartInfo.RedirectStandardOutput = true;
-               _Process.StartInfo.Arguments = _Args;
-
-               _Process.Start();
-
-               Thread.Sleep(Convert.ToInt32(_Arguements[2]));
-   
             }
 
          }
-
+            
       }
 
       static void run(Object _Data)
@@ -73,8 +77,7 @@ namespace screenshotcsharp
 
               _Temp = sr.ReadLine();
 
-            }
-            while (!_Temp.StartsWith("SYNC"));
+            } while (!_Temp.StartsWith("SYNC"));
 
          }
 
