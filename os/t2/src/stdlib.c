@@ -126,8 +126,13 @@ void* malloc(size_t _Size)
    if (_Size > _s_current_size)
    {
 
-      if (!_s_malloc_array) _s_malloc_array = sysbrk(MALLOC_SIZE);
+      if (!_s_malloc_array) 
+      {
+
+         _s_malloc_array = (char*)sysbrk(MALLOC_SIZE);
       
+      }
+
       /* check free list for memory */
 
       else
@@ -225,13 +230,13 @@ void* manage_free_list(void* _Memory, MALLOC_STATE _State)
    if (!_s_loaned_nodes)
    {
 
-      _s_loaned_nodex = (hash_table*)malloc(sizeof(hash_table));
+      _s_loaned_nodes = (hash_table*)malloc(sizeof(hash_table));
 
       hash_table_create(_s_loaned_nodes, 10000); /* 40,000 byte hash table */
 
    }
 
-   switch (_State):
+   switch (_State)
    {
 
       case MALLOC_REMOVE:

@@ -30,7 +30,7 @@
 void stack_create(stack* _Stack)
 {
 
-   _Stack->m_list = malloc(sizeof(double_linked_list));
+   _Stack->m_list = (void*)malloc(sizeof(double_linked_list));
 
    double_linked_list_create(_Stack->m_list);
 

@@ -25,25 +25,52 @@
 /*                                                                            */
 /* Arguements:                                                                */
 /*                                                                            */
-/*    size_t: amount of memory to be allocated to a process in bytes          */
+/*    size_t: process ID of the process be allocated resources                */
 /*                                                                            */
 /* Returns:                                                                   */
 /*                                                                            */
-/*    void*: pointer to the block of memory that has been allocated           */
+/*    void*: pointer to the page of memory that has been allocated            */
 /*                                                                            */
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-void* alloc_sys_mem(size_t)
+void* alloc_sys_mem(size_t _ProcessId)
 {
 
-   /* 65,536 bytes possible in a 16 bit system */
-   /* 4,294,967,296 bytes possible in a 32 bit system */
-   /* 18,446,744,073,709,551,616 bytes possible in a 64 bit system */
+   size_t* _FreePageNumber = malloc(sizeof(size_t));
 
-   size_t _LastMemoryIndex = sys_get_addressable_memory();
+   void* _PageLocation;
 
-   
+   /* in the future this will need a global lock */
+
+   free_page_list* _g_page_table_reference = sys_get_free_page_list();
+
+   process* _g_process = sys_get_process(_ProcessId);
+
+   #if DEBUG 
+
+      if (!_g_process) 
+      {
+
+         printf("Attempting to allocate a page to a non-existant process, dumping the process table...\n");
+
+         exit();
+
+      }
+
+   #endif
+
+   _FreePageNumber = _Pagedouble_linked_list_pop_front(free_page_list);
+
+   vector_push_back(_g_process.heap_pages, _FreePageNumber);
+
+   /* set up page to rw within only that process */
+
+   _PageLocation = sys_set_page_properties(_g_process, _FreePageNumber);
+
+   /* unlock global alloc lock */
+
+   return _PageLocation;
 
 }
 
@@ -51,12 +78,12 @@ void* alloc_sys_mem(size_t)
 /* ************************************************************************** */
 /* Function:                                                                  */
 /*                                                                            */
-/*    make_color                                                              */
+/*    free_sys_mem                                                            */
 /*                                                                            */
 /* Arguements:                                                                */
 /*                                                                            */
-/*    enum VGA_COLOR: A color that will be the forground                      */
-/*    enum VGA_COLOR: A color that will be the background                     */
+/*    void*: pointer to a page of memory that will no longer be allocated     */
+/*         : to a particular process                                          */
 /*                                                                            */
 /* Returns:                                                                   */
 /*                                                                            */
@@ -65,49 +92,10 @@ void* alloc_sys_mem(size_t)
 /* ************************************************************************** */
 /* ************************************************************************** */
 
+void free_sys_mem(void*)
+{
 
-static void free_sys_mem(void*);
-
-/* ************************************************************************** */
-/* ************************************************************************** */
-/* Function:                                                                  */
-/*                                                                            */
-/*    make_color                                                              */
-/*                                                                            */
-/* Arguements:                                                                */
-/*                                                                            */
-/*    enum VGA_COLOR: A color that will be the forground                      */
-/*    enum VGA_COLOR: A color that will be the background                     */
-/*                                                                            */
-/* Returns:                                                                   */
-/*                                                                            */
-/*    uint8_t: a vga color to be used in a terminal                           */
-/*                                                                            */
-/* ************************************************************************** */
-/* ************************************************************************** */
-
-
-static char* _s_get_system_alloc_pointer(void);
-
-/* ************************************************************************** */
-/* ************************************************************************** */
-/* Function:                                                                  */
-/*                                                                            */
-/*    make_color                                                              */
-/*                                                                            */
-/* Arguements:                                                                */
-/*                                                                            */
-/*    enum VGA_COLOR: A color that will be the forground                      */
-/*    enum VGA_COLOR: A color that will be the background                     */
-/*                                                                            */
-/* Returns:                                                                   */
-/*                                                                            */
-/*    uint8_t: a vga color to be used in a terminal                           */
-/*                                                                            */
-/* ************************************************************************** */
-/* ************************************************************************** */
-
-void sysbrk(size_t);
+}
 
 /* ************************************************************************** */
 /* ************************************************************************** */
