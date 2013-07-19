@@ -6,3 +6,11 @@ C:\Users\Jarret\Documents\GitHub\ev7\Projects\screenshotcsharp\screenshotcsharp\
 C:\Users\Jarret\Documents\GitHub\ev7\Projects\screenshotcsharp\screenshotcsharp\obj\Debug\screenshotcsharp.csproj.GenerateResource.Cache
 C:\Users\Jarret\Documents\GitHub\ev7\Projects\screenshotcsharp\screenshotcsharp\obj\Debug\screenshotcsharp.exe
 C:\Users\Jarret\Documents\GitHub\ev7\Projects\screenshotcsharp\screenshotcsharp\obj\Debug\screenshotcsharp.pdb
+C:\Users\jarret\Documents\Visual Studio 2012\Projects\screenshotcsharp\screenshotcsharp\bin\Debug\screenshotcsharp.exe.config
+C:\Users\jarret\Documents\Visual Studio 2012\Projects\screenshotcsharp\screenshotcsharp\obj\Debug\screenshotcsharp.exe
+C:\Users\jarret\Documents\Visual Studio 2012\Projects\screenshotcsharp\screenshotcsharp\obj\Debug\screenshotcsharp.pdb
+C:\Users\jarret\Documents\Visual Studio 2012\Projects\screenshotcsharp\screenshotcsharp\bin\Debug\screenshotcsharp.exe
+C:\Users\jarret\Documents\Visual Studio 2012\Projects\screenshotcsharp\screenshotcsharp\bin\Debug\screenshotcsharp.pdb
+C:\Users\jarret\Documents\Visual Studio 2012\Projects\screenshotcsharp\screenshotcsharp\obj\Debug\screenshotcsharp.csprojResolveAssemblyReference.cache
+C:\Users\jarret\Documents\Visual Studio 2012\Projects\screenshotcsharp\screenshotcsharp\obj\Debug\screenshotcsharp.Properties.Resources.resources
+C:\Users\jarret\Documents\Visual Studio 2012\Projects\screenshotcsharp\screenshotcsharp\obj\Debug\screenshotcsharp.csproj.GenerateResource.Cache
