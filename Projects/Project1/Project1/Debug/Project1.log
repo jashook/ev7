@@ -1,0 +1,20 @@
+﻿Build started 7/26/2013 9:01:44 AM.
+     1>Project "C:\Users\Jarret\Documents\GitHub\ev7\Projects\Project1\Project1\Project1.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         main.cpp
+     1>c:\users\jarret\documents\github\ev7\projects\project1\project1\kernel.hpp(49): error C2065: 'process' : undeclared identifier
+                 c:\users\jarret\documents\github\ev7\projects\project1\project1\kernel.hpp(89) : see reference to class template instantiation 'el::ev7n::kernel<__Size>' being compiled
+     1>c:\users\jarret\documents\github\ev7\projects\project1\project1\kernel.hpp(49): error C2275: 'el::ev7n::frame' : illegal use of this type as an expression
+                 c:\users\jarret\documents\github\ev7\projects\project1\project1\frame.hpp(40) : see declaration of 'el::ev7n::frame'
+     1>c:\users\jarret\documents\github\ev7\projects\project1\project1\kernel.hpp(49): error C2977: 'std::vector' : too many template arguments
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\vector(655) : see declaration of 'std::vector'
+     1>c:\users\jarret\documents\github\ev7\projects\project1\project1\kernel.hpp(49): error C2059: syntax error : '>'
+     1>c:\users\jarret\documents\github\ev7\projects\project1\project1\kernel.hpp(49): error C2238: unexpected token(s) preceding ';'
+                 c:\users\jarret\documents\github\ev7\projects\project1\project1\frame.hpp(40) : see declaration of 'el::ev7n::frame'
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\vector(655) : see declaration of 'std::vector'
+     1>Done Building Project "C:\Users\Jarret\Documents\GitHub\ev7\Projects\Project1\Project1\Project1.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.97
