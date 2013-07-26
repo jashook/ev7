@@ -10,13 +10,12 @@ Module start_driver
 
         _Process.StartInfo.UseShellExecute = False
         _Process.StartInfo.RedirectStandardOutput = True
-        _Process.StartInfo.FileName = "start_driver.bat"
+        _Process.StartInfo.FileName = "E:\\startup.bat"
         _Process.StartInfo.CreateNoWindow = True
         _Process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
 
         _Process.Start()
 
-        _Process.WaitForExit()
 
     End Sub
 

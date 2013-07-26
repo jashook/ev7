@@ -29,7 +29,7 @@
 
 void queue_create(queue* _Queue)
 {
-   _Queue->m_list = malloc(sizeof(double_linked_list));
+   _Queue->m_list = (void*)malloc(sizeof(double_linked_list));
 
    double_linked_list_create(_Queue->m_list);
 }

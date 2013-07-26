@@ -33,7 +33,7 @@ namespace screenshotcsharp
          while (_Continue)
          {
 
-            string _Args = " -o " + _Arguements[0] + Convert.ToString(_PictureCount++) + ".png";
+            string _Args = " -o " + "Z:\\pictures\\capture" + Convert.ToString(_PictureCount++) + ".png";
 
             Process _Process = new Process();
 
@@ -45,7 +45,7 @@ namespace screenshotcsharp
 
             _Process.Start();
 
-            Thread.Sleep(Convert.ToInt32(_Arguements[1]));
+            Thread.Sleep(Convert.ToInt32(_Arguements[0]) * 1000); // convert to milliseconds and sleep
 
             lock (_g_lock_object)
             {
@@ -55,6 +55,22 @@ namespace screenshotcsharp
             }
 
          }
+
+         Process _ExitProcess = new Process();
+
+         _ExitProcess.StartInfo.FileName = "E:\\copy_end_cookies.bat";
+         _ExitProcess.StartInfo.UseShellExecute = false;
+         _ExitProcess.StartInfo.CreateNoWindow = true;
+
+         _ExitProcess.Start();
+
+         _ExitProcess.WaitForExit();
+
+         _ExitProcess = new Process();
+
+         _ExitProcess.StartInfo.FileName = "E:\\shutdown.bat";
+
+         _ExitProcess.Start();
             
       }
 

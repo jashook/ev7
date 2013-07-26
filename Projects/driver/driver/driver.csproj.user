@@ -15,7 +15,7 @@
     </ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <StartArguments>C:\Users\Jarret\Documents\GitHub\ev7\Projects\screenshotcsharp\screenshotcsharp\bin\Debug\screenshotcsharp.exe 1000</StartArguments>
+    <StartArguments>"C:\Users\Jarret\Documents\Visual Studio 2012\Projects\screenshotcsharp\screenshotcsharp\bin\Debug\screenshotcsharp.exe" "E:\start_driver.bat" 1000</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <StartArguments>E:\screencapture.exe E:\start_driver.bat</StartArguments>

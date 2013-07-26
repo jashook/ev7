@@ -25,7 +25,13 @@
 /* ************************************************************************** */
 /* ************************************************************************** */
 
-#ifdef __unix__
+#ifdef __Ev7__
+
+   #include "stdlib.h"
+   #include "stdio.h"
+   #include "string.h"
+
+#elif __unix__
 
    #include <stdlib.h>
    #include <stdio.h>
@@ -36,12 +42,6 @@
    #include <stdlib.h>
    #include <stdio.h>
    #include <string.h>
-
-#else
-
-   #include "stdlib.h"
-   #include "stdio.h"
-   #include "string.h"
 
 #endif
 

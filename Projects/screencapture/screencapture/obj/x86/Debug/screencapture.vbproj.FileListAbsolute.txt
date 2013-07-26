@@ -16,3 +16,6 @@ C:\Users\Jarret\Documents\GitHub\ev7\Projects\screencapture\screencapture\bin\De
 C:\Users\Jarret\Documents\GitHub\ev7\Projects\screencapture\screencapture\bin\Debug\screencapture.xml
 C:\Users\Jarret\Documents\GitHub\ev7\Projects\screencapture\screencapture\obj\x86\Debug\WindowsApplication1.Resources.resources
 C:\Users\Jarret\Documents\GitHub\ev7\Projects\screencapture\screencapture\obj\x86\Debug\screencapture.vbproj.GenerateResource.Cache
+C:\Users\jarret\Documents\Visual Studio 2012\Projects\screencapture\screencapture\obj\x86\Debug\screencapture.exe
+C:\Users\jarret\Documents\Visual Studio 2012\Projects\screencapture\screencapture\obj\x86\Debug\screencapture.xml
+C:\Users\jarret\Documents\Visual Studio 2012\Projects\screencapture\screencapture\obj\x86\Debug\screencapture.pdb

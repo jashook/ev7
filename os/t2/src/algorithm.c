@@ -89,8 +89,8 @@ void merge_sort(void* _Array, size_t _ArraySize, size_t _ElementSize, int (*_com
 
    int _Count;
 
-   void* _ArrayCopy = malloc(_ElementSize * _ArraySize);
-   void* _Buffer = malloc(_ElementSize * _ArraySize);
+   void* _ArrayCopy = (void*)malloc(_ElementSize * _ArraySize);
+   void* _Buffer = (void*)malloc(_ElementSize * _ArraySize);
 
    size_t _Size = 1; /* smallest size possible */
 

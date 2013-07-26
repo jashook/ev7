@@ -31,11 +31,12 @@ namespace driver
 
          }
 
-         _Process.StartInfo.UseShellExecute = true;
-         //_Process.StartInfo.RedirectStandardOutput = true;
+         _Process.StartInfo.UseShellExecute = false;
+         _Process.StartInfo.RedirectStandardOutput = true;
          _Process.StartInfo.FileName = _Arguements[0];
-         //_Process.StartInfo.CreateNoWindow = false;
-         //_Process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+         _Process.StartInfo.CreateNoWindow = false;
+         _Process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+         _Process.StartInfo.Arguments = _Arguements[2];
 
          NamedPipeServerStream _PipeServer = new NamedPipeServerStream("screenshotpipe", PipeDirection.InOut, 1);
 
@@ -54,7 +55,7 @@ namespace driver
          _Process.StartInfo.RedirectStandardOutput = true;
          _Process.StartInfo.FileName = _Arguements[1];
          _Process.StartInfo.CreateNoWindow = true;
-         _Process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;*/
+         _Process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
 
          _Process.Start(); // most likely is the selenium driver
 
