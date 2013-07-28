@@ -1,5 +1,5 @@
-﻿Build started 7/26/2013 9:01:44 AM.
-     1>Project "C:\Users\Jarret\Documents\GitHub\ev7\Projects\Project1\Project1\Project1.vcxproj" on node 2 (Build target(s)).
+﻿Build started 7/28/2013 10:48:40 AM.
+     1>Project "C:\Users\jarret\Documents\GitHub\ev7\Projects\Project1\Project1\Project1.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
          main.cpp
@@ -13,8 +13,8 @@
      1>c:\users\jarret\documents\github\ev7\projects\project1\project1\kernel.hpp(49): error C2238: unexpected token(s) preceding ';'
                  c:\users\jarret\documents\github\ev7\projects\project1\project1\frame.hpp(40) : see declaration of 'el::ev7n::frame'
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\vector(655) : see declaration of 'std::vector'
-     1>Done Building Project "C:\Users\Jarret\Documents\GitHub\ev7\Projects\Project1\Project1\Project1.vcxproj" (Build target(s)) -- FAILED.
+     1>Done Building Project "C:\Users\jarret\Documents\GitHub\ev7\Projects\Project1\Project1\Project1.vcxproj" (Build target(s)) -- FAILED.
 
 Build FAILED.
 
-Time Elapsed 00:00:00.97
+Time Elapsed 00:00:01.52

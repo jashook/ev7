@@ -28,6 +28,7 @@
 #include <iostream>
 
 #include "frame_list.hpp"
+#include "interupt_handler.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -145,6 +146,20 @@ template <typename __Type, std::size_t __MinCycles, std::size_t __MaxCycles> cla
 
       void _read_page(std::size_t _PageNumber)
       {
+
+         bool _Resident = _m_frame->check_resident(_PageNumber);
+
+         if (_Resident)
+         {
+            this->log(READ);
+
+         }
+
+         else
+         {
+            this->log(READFAULT);
+
+         }
 
          // check if page is resident
          // log if resident
