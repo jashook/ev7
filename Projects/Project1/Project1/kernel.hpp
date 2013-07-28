@@ -45,8 +45,8 @@ template <std::size_t __Size> class kernel
 
    private:   // Member Variables
 
-      static int _m_frames[__Size == 0 ? 1 : __Size]; 
-      static std::vector< process<frame, _s_min_cycles, _s_max_cycles>* > _m_processes;
+      int _m_frames[__Size == 0 ? 1 : __Size]; 
+      std::vector< kernel* >* _m_processes;
 
    public:   // Member Functions
 

@@ -27,8 +27,9 @@
 
 #include <iostream>
 
+#include "base.hpp"
 #include "frame_list.hpp"
-#include "interupt_handler.hpp"
+#include "kernel.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -36,7 +37,7 @@
 namespace el {
 namespace ev7n {
 
-template <typename __Type, std::size_t __MinCycles, std::size_t __MaxCycles> class process
+template <typename __Type, std::size_t __MinCycles, std::size_t __MaxCycles> class process : public kernel<_s_frame_size>
 {
    
    private:   // Member Variables
@@ -147,7 +148,7 @@ template <typename __Type, std::size_t __MinCycles, std::size_t __MaxCycles> cla
       void _read_page(std::size_t _PageNumber)
       {
 
-         bool _Resident = _m_frame->check_resident(_PageNumber);
+         bool _Resident = _m_frames->check_resident(_PageNumber);
 
          if (_Resident)
          {
