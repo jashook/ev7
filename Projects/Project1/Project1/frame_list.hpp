@@ -64,7 +64,7 @@ template <typename __Type> class frame_list
 
       bool _check_resident(std::size_t _PageFrame)
       {
-         std::vector<__Type>::iterator _Iterator = _m_vector->begin();
+         typename std::vector<__Type>::iterator _Iterator = _m_vector->begin();
 
          bool _Resident = false;
 
@@ -83,13 +83,13 @@ template <typename __Type> class frame_list
 
       }
 
-      void _ctor(std::size_t _Size) { _m_vector = new std::vector<__Type>(__Size); }
+      void _ctor(std::size_t _Size) { _m_vector = new std::vector<__Type>(_Size); }
 
       void _dtor() { delete _m_vector; }
 
       void _scan_use_bits()
       {
-         std::vector<__Type>::iterator _Iterator = _m_vector->begin();
+         typename std::vector<__Type>::iterator _Iterator = _m_vector->begin();
 
          while (_Iterator != _m_vector->end())
          {

@@ -154,7 +154,7 @@ template <typename __Type, std::size_t __MinCycles, std::size_t __MaxCycles> cla
 
       }
 
-      void _scan_use_bits()
+      void _scan_the_use_bits()
       {
 
          _m_frames->scan_use_bits();
